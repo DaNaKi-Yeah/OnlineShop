@@ -8,7 +8,6 @@ namespace OnlineShop.Domain.Models
         public Client Client { get; set; }
         public int OrderId { get; set; }
         public Order Order { get; set; }
-
         public List<BuyItem> BuyItems { get; set; }
     }
 }

@@ -9,6 +9,7 @@ namespace OnlineShop.Domain.Models
         public string Description { get; set; }
         public string PictureLink { get; set; }
         public decimal Price { get; set; }
+
         public int? CategoryId { get; set; }
         public Category Category { get; set; }
         public List<Review> Reviews { get; set; }
