@@ -9,5 +9,6 @@ namespace OnlineShop.Domain.Relations
         public Property Property { get; set; }
         public int ValueId { get; set; }
         public Value Value { get; set; }
+        public List<ProductPropertyValue> ProductPropertyValues { get; set; }
     }
 }
