@@ -2,8 +2,7 @@
 
 namespace OnlineShop.Domain.Models
 {
-    public class Property : BaseEnitity<int>
+    public class Client: BaseEnitity<int>
     {
-        public string Name { get; set; }
     }
 }
