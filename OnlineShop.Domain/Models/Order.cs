@@ -2,9 +2,9 @@
 
 namespace OnlineShop.Domain.Models
 {
-    public class Order: BaseEnitity<int>
+    public class Order : BaseEnitity<int>
     {
-        public decimal TotalSum { get; set; }
+        public decimal TotalSum { get { return Cart.TotalSum; } }
 
         public int CartId { get; set; }
         public Cart Cart { get; set; }

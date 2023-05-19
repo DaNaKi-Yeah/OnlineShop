@@ -2,8 +2,23 @@
 
 namespace OnlineShop.Domain.Models
 {
-    public class Cart: BaseEnitity<int>
+    public class Cart : BaseEnitity<int>
     {
+        public decimal TotalSum
+        {
+            get
+            {
+                decimal sum = 0;
+
+                foreach (var item in BuyItems)
+                {
+                    sum += item.Product.Price * item.Count;
+                }
+
+                return sum;
+            }
+        }
+
         public int ClientId { get; set; }
         public Client Client { get; set; }
         public int OrderId { get; set; }

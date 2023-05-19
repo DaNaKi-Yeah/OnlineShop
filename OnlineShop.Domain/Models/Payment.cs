@@ -4,9 +4,7 @@ namespace OnlineShop.Domain.Models
 {
     public class Payment: BaseEnitity<int>
     {
-        public string CardNumber { get; set; }
-        public string CardOwner { get; set; }
-        public string CardCW { get; set; }
+        public decimal TotalSum { get { return Order.TotalSum; } }
 
         public int OrderId { get; set; }
         public Order Order { get; set; }
