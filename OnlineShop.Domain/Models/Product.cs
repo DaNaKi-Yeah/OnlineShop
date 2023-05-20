@@ -2,7 +2,7 @@
 
 namespace OnlineShop.Domain.Models
 {
-    public class Product : BaseEnitity<int>
+    public class Product : BaseEntity<int>
     {
         public string ModelName { get; set; }
         public int? YearOfProduction { get; set; }

@@ -3,7 +3,7 @@ using OnlineShop.Domain.Relations;
 
 namespace OnlineShop.Domain.Models
 {
-    public class Value : BaseEnitity<int>
+    public class Value : BaseEntity<int>
     {
         public string Name { get; set; }
 

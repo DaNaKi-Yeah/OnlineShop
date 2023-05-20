@@ -2,7 +2,7 @@
 
 namespace OnlineShop.Domain.Models
 {
-    public class Category : BaseEnitity<int>
+    public class Category : BaseEntity<int>
     {
         public string Name { get; set; }
 

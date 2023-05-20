@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Domain.Relations
 {
-    public class ProductPropertyValue : BaseEnitity<int>
+    public class ProductPropertyValue : BaseEntity<int>
     {
         public int PropertyValueId { get; set; }
         public PropertyValue PropertyValue { get; set; }

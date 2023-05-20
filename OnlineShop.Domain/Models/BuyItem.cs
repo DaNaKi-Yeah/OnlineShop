@@ -2,7 +2,7 @@
 
 namespace OnlineShop.Domain.Models
 {
-    public class BuyItem: BaseEnitity<int>
+    public class BuyItem: BaseEntity<int>
     {
         public int Count { get; set; }
 

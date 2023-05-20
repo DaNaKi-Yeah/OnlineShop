@@ -2,7 +2,7 @@
 
 namespace OnlineShop.Domain.Models
 {
-    public class Review: BaseEnitity<int>
+    public class Review: BaseEntity<int>
     {
         public string Comment { get; set; }
         public int Rating { get; set; }

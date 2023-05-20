@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Domain.Common
 {
-    public abstract class BaseEnitity<TKey>
+    public abstract class BaseEntity<TKey>
     {
         public TKey Id { get; set; }
         public bool IsDeleted { get; set; }

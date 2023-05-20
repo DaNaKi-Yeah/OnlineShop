@@ -2,7 +2,7 @@
 
 namespace OnlineShop.Domain.Models
 {
-    public class Order : BaseEnitity<int>
+    public class Order : BaseEntity<int>
     {
         public decimal TotalSum { get { return Cart.TotalSum; } }
 

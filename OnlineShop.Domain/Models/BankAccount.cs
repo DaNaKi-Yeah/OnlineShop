@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Domain.Models
 {
-    public class BankAccount : BaseEnitity<int>
+    public class BankAccount : BaseEntity<int>
     {
         public string CardNumber { get; set; }
         public decimal Sum { get; set; }
