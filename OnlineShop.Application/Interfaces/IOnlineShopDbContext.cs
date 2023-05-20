@@ -22,6 +22,8 @@ namespace OnlineShop.Application.Interfaces
         DbSet<Review> Reviews { get; set; }
         DbSet<Value> Values { get; set; }
 
+        DbSet<TEntity> Set<TEntity>() where TEntity : class;
+        void SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
