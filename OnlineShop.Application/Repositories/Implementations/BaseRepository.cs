@@ -33,7 +33,7 @@ namespace OnlineShop.Application.Repositories.Implementations
 
             return key;
         }
-        public async Task<IEnumerable<TKey>> AddRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<List<TKey>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             List<TKey> result = new List<TKey>();
 
@@ -49,7 +49,7 @@ namespace OnlineShop.Application.Repositories.Implementations
             return result;
         }
 
-        public async Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<List<TEntity>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();
         }

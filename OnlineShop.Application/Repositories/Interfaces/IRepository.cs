@@ -11,10 +11,10 @@ namespace OnlineShop.Application.Repositories.Interfaces
     public interface IRepository<TEntity, TKey> where TEntity : BaseEntity<TKey>
     {
         public Task<TKey> AddAsync(TEntity entity);
-        public Task<IEnumerable<TKey>> AddRangeAsync(IEnumerable<TEntity> entities);
+        public Task<List<TKey>> AddRangeAsync(IEnumerable<TEntity> entities);
 
         public Task<TEntity> GetByIdAsync(TKey id);
-        public Task<IEnumerable<TEntity>> GetAllAsync();
+        public Task<List<TEntity>> GetAllAsync();
 
         public Task UpdateAsync(TEntity entity);
 
