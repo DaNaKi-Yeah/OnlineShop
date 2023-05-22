@@ -16,10 +16,10 @@ namespace OnlineShop.Application.Repositories.Interfaces
         public Task<TEntity> GetByIdAsync(TKey id);
         public Task<IEnumerable<TEntity>> GetAllAsync();
 
-        public Task Update(TEntity entity);
+        public Task UpdateAsync(TEntity entity);
 
-        public Task Remove(TEntity entity);
-        public Task RemoveById(TKey id);
+        public Task RemoveAsync(TEntity entity);
+        public Task RemoveByIdAsync(TKey id);
 
         public IQueryable<TEntity> GetQuery();
     }

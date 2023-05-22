@@ -62,24 +62,24 @@ namespace OnlineShop.Application.Repositories.Implementations
                 : entity;
         }
 
-        public async Task Remove(TEntity entity)
+        public async Task RemoveAsync(TEntity entity)
         {
             _dbSet.Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
-        public async Task RemoveById(TKey id)
+        public async Task RemoveByIdAsync(TKey id)
         {
             TEntity entity = await GetByIdAsync(id);
 
             _dbSet.Remove(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public async Task Update(TEntity entity)
+        public async Task UpdateAsync(TEntity entity)
         {
             entity.UpdateDate = DateTime.UtcNow;
             _dbSet.Update(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public IQueryable<TEntity> GetQuery()
