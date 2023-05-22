@@ -1,8 +1,9 @@
-﻿using OnlineShop.Domain.Relations;
+﻿using OnlineShop.Domain.Common;
+using OnlineShop.Domain.Relations;
 
 namespace OnlineShop.Domain.Models
 {
-    public class ProductPropertyValuesInventory
+    public class ProductPropertyValuesInventory : BaseEntity<int>
     {
         public int Count { get; set; }
 
