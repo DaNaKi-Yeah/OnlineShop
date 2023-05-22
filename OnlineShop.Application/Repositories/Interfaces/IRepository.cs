@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Application.Repositories.Interfaces
 {
-    public interface IRepository<TEntity, TKey> where TEntity : BaseEntity<TKey>
+    public interface IRepository<TEntity, TKey>
     {
         public Task<TKey> AddAsync(TEntity entity);
         public Task<List<TKey>> AddRangeAsync(IEnumerable<TEntity> entities);
