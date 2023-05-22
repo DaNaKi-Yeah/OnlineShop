@@ -23,7 +23,7 @@ namespace OnlineShop.Application.Interfaces
         DbSet<Value> Values { get; set; }
 
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
-        void SaveChanges();
+        int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

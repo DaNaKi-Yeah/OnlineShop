@@ -28,7 +28,7 @@ namespace OnlineShop.Persistence.Db.SqlServer
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.ApplyConfiguration(new ProductConfiguration()) //we need create configurations be like this
-            base.OnModelCreating(modelBuilder); 
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
