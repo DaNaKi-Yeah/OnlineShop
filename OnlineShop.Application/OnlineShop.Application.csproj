@@ -17,4 +17,8 @@
     <ProjectReference Include="..\OnlineShop.Domain\OnlineShop.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CQRS\Properties\DTOs\" />
+  </ItemGroup>
+
 </Project>
