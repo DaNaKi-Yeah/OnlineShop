@@ -7,7 +7,7 @@ namespace OnlineShop.Domain.Models
         public string Comment { get; set; }
         public int Rating { get; set; }
 
-        public int? ProductId { get; set; }
+        public int ProductId { get; set; }
         public Product Product { get; set; }
     }
 }

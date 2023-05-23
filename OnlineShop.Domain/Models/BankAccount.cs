@@ -15,5 +15,6 @@ namespace OnlineShop.Domain.Models
 
         public int ClientId { get; set; }
         public Client Client { get; set; }
+        public List<Payment> Payments { get; set; }
     }
 }
