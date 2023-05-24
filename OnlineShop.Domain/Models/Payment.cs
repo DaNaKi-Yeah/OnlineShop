@@ -9,6 +9,6 @@ namespace OnlineShop.Domain.Models
         public int OrderId { get; set; }
         public Order Order { get; set; }
         public int? BankAccountId { get; set; }
-        public BankAccount BankAccount { get; set; }
+        public BankAccount? BankAccount { get; set; }
     }
 }
