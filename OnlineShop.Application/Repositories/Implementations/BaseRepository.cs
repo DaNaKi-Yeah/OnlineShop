@@ -28,10 +28,10 @@ namespace OnlineShop.Application.Repositories.Implementations
             entity.CreateDate = DateTime.UtcNow;
             entity.UpdateDate = DateTime.UtcNow;
 
-            TKey key = (await _dbSet.AddAsync(entity)).Entity.Id;
+            var item = await _dbSet.AddAsync(entity);
             await _context.SaveChangesAsync();
 
-            return key;
+            return item.Entity.Id;
         }
         public async Task<List<TKey>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
