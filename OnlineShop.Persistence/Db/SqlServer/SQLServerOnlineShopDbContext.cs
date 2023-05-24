@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Application.Interfaces;
+using OnlineShop.Domain.Common;
 using OnlineShop.Domain.Models;
 using OnlineShop.Persistence.EntityTypeConfigurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,24 +28,29 @@ namespace OnlineShop.Persistence.Db.SqlServer
 
         public SQLServerOnlineShopDbContext(DbContextOptions options) : base(options) { }
 
+        private bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
+        {
+            while (toCheck != null && toCheck != typeof(object))
+            {
+                var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+                if (generic == cur)
+                {
+                    return true;
+                }
+                toCheck = toCheck.BaseType;
+            }
+            return false;
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new BankAccountConfiguration());
-            modelBuilder.ApplyConfiguration(new BuytItemConfiguration());
-            modelBuilder.ApplyConfiguration(new CartConfiguration());
-            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new ClientConfiguration());
-            modelBuilder.ApplyConfiguration(new OrderConfiguration());
-            modelBuilder.ApplyConfiguration(new PaymentConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductPropertyValueConfiguration());
-            modelBuilder.ApplyConfiguration(new ProductPropertyValuesInventoryConfiguration());
-            modelBuilder.ApplyConfiguration(new PropertyConfiguration());
-            modelBuilder.ApplyConfiguration(new PropertyValuesConfiguration());
-            modelBuilder.ApplyConfiguration(new ReviewConfiguration());
-            modelBuilder.ApplyConfiguration(new ValueConfiguration());
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly(),
+                t => t.GetInterfaces().Any(i =>
+                i.IsGenericType &&
+                i.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>) &&
+                IsSubclassOfRawGeneric(typeof(BaseEntity<>), i.GenericTypeArguments[0])));
         }
     }
 }
