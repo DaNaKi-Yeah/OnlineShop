@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Application.Interfaces;
 using OnlineShop.Domain.Models;
+using OnlineShop.Persistence.EntityTypeConfigurations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,22 @@ namespace OnlineShop.Persistence.Db.SqlServer
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfiguration(new ProductConfiguration()) //we need create configurations be like this
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new BankAccountConfiguration());
+            modelBuilder.ApplyConfiguration(new BuytItemConfiguration());
+            modelBuilder.ApplyConfiguration(new CartConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ClientConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductPropertyValueConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductPropertyValuesInventoryConfiguration());
+            modelBuilder.ApplyConfiguration(new PropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new PropertyValuesConfiguration());
+            modelBuilder.ApplyConfiguration(new ReviewConfiguration());
+            modelBuilder.ApplyConfiguration(new ValueConfiguration());
         }
     }
 }
