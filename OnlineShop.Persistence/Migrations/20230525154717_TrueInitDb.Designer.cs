@@ -12,8 +12,8 @@ using OnlineShop.Persistence.Db.SqlServer;
 namespace OnlineShop.Persistence.Migrations
 {
     [DbContext(typeof(SQLServerOnlineShopDbContext))]
-    [Migration("20230524121129_InitDb")]
-    partial class InitDb
+    [Migration("20230525154717_TrueInitDb")]
+    partial class TrueInitDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,7 @@ namespace OnlineShop.Persistence.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("BankAccount");
+                    b.ToTable("BankAccounts");
                 });
 
             modelBuilder.Entity("OnlineShop.Domain.Models.BuyItem", b =>
@@ -308,7 +308,7 @@ namespace OnlineShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PropertyValues");
+                    b.ToTable("Properties");
                 });
 
             modelBuilder.Entity("OnlineShop.Domain.Models.Review", b =>
@@ -420,7 +420,7 @@ namespace OnlineShop.Persistence.Migrations
 
                     b.HasIndex("ValueId");
 
-                    b.ToTable("PropertyValue");
+                    b.ToTable("PropertyValues");
                 });
 
             modelBuilder.Entity("OnlineShop.Domain.Models.BankAccount", b =>

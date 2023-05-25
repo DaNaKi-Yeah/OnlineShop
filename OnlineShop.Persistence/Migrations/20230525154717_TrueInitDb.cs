@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace OnlineShop.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitDb : Migration
+    public partial class TrueInitDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,7 +41,7 @@ namespace OnlineShop.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PropertyValues",
+                name: "Properties",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -52,7 +52,7 @@ namespace OnlineShop.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PropertyValues", x => x.Id);
+                    table.PrimaryKey("PK_Properties", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,7 +97,7 @@ namespace OnlineShop.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BankAccount",
+                name: "BankAccounts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -111,9 +111,9 @@ namespace OnlineShop.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BankAccount", x => x.Id);
+                    table.PrimaryKey("PK_BankAccounts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BankAccount_Clients_ClientId",
+                        name: "FK_BankAccounts_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "Id",
@@ -143,7 +143,7 @@ namespace OnlineShop.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PropertyValue",
+                name: "PropertyValues",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -155,15 +155,15 @@ namespace OnlineShop.Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PropertyValue", x => x.Id);
+                    table.PrimaryKey("PK_PropertyValues", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PropertyValue_PropertyValues_PropertyId",
+                        name: "FK_PropertyValues_Properties_PropertyId",
                         column: x => x.PropertyId,
-                        principalTable: "PropertyValues",
+                        principalTable: "Properties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_PropertyValue_Values_ValueId",
+                        name: "FK_PropertyValues_Values_ValueId",
                         column: x => x.ValueId,
                         principalTable: "Values",
                         principalColumn: "Id",
@@ -287,9 +287,9 @@ namespace OnlineShop.Persistence.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProductPropertyValue_PropertyValue_PropertyValueId",
+                        name: "FK_ProductPropertyValue_PropertyValues_PropertyValueId",
                         column: x => x.PropertyValueId,
-                        principalTable: "PropertyValue",
+                        principalTable: "PropertyValues",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.SetNull);
                 });
@@ -309,9 +309,9 @@ namespace OnlineShop.Persistence.Migrations
                 {
                     table.PrimaryKey("PK_Payments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Payments_BankAccount_BankAccountId",
+                        name: "FK_Payments_BankAccounts_BankAccountId",
                         column: x => x.BankAccountId,
-                        principalTable: "BankAccount",
+                        principalTable: "BankAccounts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -323,8 +323,8 @@ namespace OnlineShop.Persistence.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BankAccount_ClientId",
-                table: "BankAccount",
+                name: "IX_BankAccounts_ClientId",
+                table: "BankAccounts",
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
@@ -380,13 +380,13 @@ namespace OnlineShop.Persistence.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PropertyValue_PropertyId",
-                table: "PropertyValue",
+                name: "IX_PropertyValues_PropertyId",
+                table: "PropertyValues",
                 column: "PropertyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PropertyValue_ValueId",
-                table: "PropertyValue",
+                name: "IX_PropertyValues_ValueId",
+                table: "PropertyValues",
                 column: "ValueId");
 
             migrationBuilder.CreateIndex(
@@ -411,7 +411,7 @@ namespace OnlineShop.Persistence.Migrations
                 name: "Reviews");
 
             migrationBuilder.DropTable(
-                name: "BankAccount");
+                name: "BankAccounts");
 
             migrationBuilder.DropTable(
                 name: "Orders");
@@ -420,7 +420,7 @@ namespace OnlineShop.Persistence.Migrations
                 name: "ProductPropertyValuesInventories");
 
             migrationBuilder.DropTable(
-                name: "PropertyValue");
+                name: "PropertyValues");
 
             migrationBuilder.DropTable(
                 name: "Carts");
@@ -429,7 +429,7 @@ namespace OnlineShop.Persistence.Migrations
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "PropertyValues");
+                name: "Properties");
 
             migrationBuilder.DropTable(
                 name: "Values");

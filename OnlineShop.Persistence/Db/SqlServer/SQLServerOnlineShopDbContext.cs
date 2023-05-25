@@ -2,6 +2,7 @@
 using OnlineShop.Application.Interfaces;
 using OnlineShop.Domain.Common;
 using OnlineShop.Domain.Models;
+using OnlineShop.Domain.Relations;
 using OnlineShop.Persistence.EntityTypeConfigurations;
 using System;
 using System.Collections.Generic;
@@ -22,9 +23,11 @@ namespace OnlineShop.Persistence.Db.SqlServer
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductPropertyValuesInventory> ProductPropertyValuesInventories { get; set; }
-        public DbSet<Property> PropertyValues { get; set; }
+        public DbSet<PropertyValue> PropertyValues { get; set; }
         public DbSet<Review> Reviews { get; set; }
         public DbSet<Value> Values { get; set; }
+        public DbSet<Property> Properties { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
 
         public SQLServerOnlineShopDbContext(DbContextOptions options) : base(options) { }
 

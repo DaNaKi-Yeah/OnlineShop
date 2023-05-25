@@ -54,7 +54,7 @@ namespace OnlineShop.Persistence.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("BankAccount");
+                    b.ToTable("BankAccounts");
                 });
 
             modelBuilder.Entity("OnlineShop.Domain.Models.BuyItem", b =>
@@ -305,7 +305,7 @@ namespace OnlineShop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PropertyValues");
+                    b.ToTable("Properties");
                 });
 
             modelBuilder.Entity("OnlineShop.Domain.Models.Review", b =>
@@ -417,7 +417,7 @@ namespace OnlineShop.Persistence.Migrations
 
                     b.HasIndex("ValueId");
 
-                    b.ToTable("PropertyValue");
+                    b.ToTable("PropertyValues");
                 });
 
             modelBuilder.Entity("OnlineShop.Domain.Models.BankAccount", b =>

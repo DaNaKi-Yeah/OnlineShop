@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Domain.Models;
+using OnlineShop.Domain.Relations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,11 @@ namespace OnlineShop.Application.Interfaces
         DbSet<Payment> Payments { get; set; }
         DbSet<Product> Products { get; set; }
         DbSet<ProductPropertyValuesInventory> ProductPropertyValuesInventories { get; set; }
-        DbSet<Property> PropertyValues { get; set; }
+        DbSet<PropertyValue> PropertyValues { get; set; }
         DbSet<Review> Reviews { get; set; }
         DbSet<Value> Values { get; set; }
+        DbSet<Property> Properties { get; set; }
+        DbSet<BankAccount> BankAccounts { get; set; }
 
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         int SaveChanges();
