@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
-
 using MediatR;
-
 using Microsoft.AspNetCore.Mvc;
-
 using OnlineShop.Application.CQRS.Properties.Commands.CreateProperty;
 using OnlineShop.Application.CQRS.Properties.Commands.RemoveProperty;
 using OnlineShop.Application.CQRS.Properties.DTOs;
 using OnlineShop.Application.CQRS.Properties.Queries.GetProperty;
 using OnlineShop.Application.CQRS.Properties.Queries.SearchProperties;
-using OnlineShop.Application.CQRS.Reviews.Commands.RemoveByIdReview;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
@@ -30,7 +26,7 @@ namespace OnlineShop.API.Controllers
 
         [HttpDelete]
         [Route("Remove")]
-        public async Task Remove([FromQuery] RemoveByIdReviewCommand command)
+        public async Task Remove([FromQuery] RemoveByIdPropertyCommand command)
         {
             await _mediator.Send(command);
         }
@@ -44,7 +40,7 @@ namespace OnlineShop.API.Controllers
 
         [HttpGet]
         [Route("Search")]
-        public async Task<List<GetPropertyDTO>> Search([FromQuery] SearchReviewsQuery query)
+        public async Task<List<GetPropertyDTO>> Search([FromQuery] SearchPropertiesQuery query)
         {
             return await _mediator.Send(query);
         }

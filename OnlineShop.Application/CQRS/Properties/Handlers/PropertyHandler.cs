@@ -5,8 +5,8 @@ using OnlineShop.Domain.Models;
 
 namespace OnlineShop.Application.CQRS.Properties.Handlers
 {
-    public class ReviewHandler : BaseHandler<Property, int>
+    public class PropertyHandler : BaseHandler<Property, int>
     {
-        public ReviewHandler(IRepository<Property, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public PropertyHandler(IRepository<Property, int> repository, IMapper mapper) : base(repository, mapper) { }
     }
 }

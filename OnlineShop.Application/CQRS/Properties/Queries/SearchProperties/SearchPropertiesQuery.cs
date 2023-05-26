@@ -4,7 +4,7 @@ using OnlineShop.Domain.Models;
 
 namespace OnlineShop.Application.CQRS.Properties.Queries.SearchProperties
 {
-    public class SearchReviewsQuery : IRequest<List<GetPropertyDTO>>
+    public class SearchPropertiesQuery : IRequest<List<GetPropertyDTO>>
     {
         public string? Search { get; set; }
         public int? PageNumber { get; set; }

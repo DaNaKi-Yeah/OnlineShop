@@ -2,7 +2,7 @@
 
 namespace OnlineShop.Application.CQRS.Properties.Commands.RemoveProperty
 {
-    public class RemoveByIdReviewCommand : IRequest
+    public class RemoveByIdPropertyCommand : IRequest
     {
         public int Id { get; set; }
     }

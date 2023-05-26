@@ -1,22 +1,18 @@
 ﻿using AutoMapper;
-
 using MediatR;
-
 using Microsoft.EntityFrameworkCore;
-
 using OnlineShop.Application.CQRS.Properties.DTOs;
 using OnlineShop.Application.CQRS.Properties.Handlers;
-using OnlineShop.Application.CQRS.Reviews.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
 namespace OnlineShop.Application.CQRS.Properties.Queries.SearchProperties
 {
-    public class SearchReviewsQueryHandler : ReviewHandler, IRequestHandler<SearchReviewsQuery, List<GetPropertyDTO>>
+    public class SearchPropertiesQueryHandler : PropertyHandler, IRequestHandler<SearchPropertiesQuery, List<GetPropertyDTO>>
     {
-        public SearchReviewsQueryHandler(IRepository<Property, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public SearchPropertiesQueryHandler(IRepository<Property, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<List<GetPropertyDTO>> Handle(SearchReviewsQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetPropertyDTO>> Handle(SearchPropertiesQuery request, CancellationToken cancellationToken)
         {
             if (request == null || string.IsNullOrEmpty(request.Search))
             {
