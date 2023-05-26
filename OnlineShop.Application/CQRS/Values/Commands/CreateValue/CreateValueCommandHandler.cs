@@ -17,7 +17,7 @@ namespace OnlineShop.Application.CQRS.Values.Commands.CreateValue
         {
             Value value = new Value { Name = request.Name };
 
-            int id = await _repository.AddAsync(property);
+            int id = await _repository.AddAsync(value);
 
             return id;
         }
