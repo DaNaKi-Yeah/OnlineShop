@@ -4,31 +4,30 @@ using MediatR;
 
 using Microsoft.EntityFrameworkCore;
 
-using OnlineShop.Application.CQRS.Properties.DTOs;
-using OnlineShop.Application.CQRS.Properties.Handlers;
+
 using OnlineShop.Application.CQRS.Reviews.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
 namespace OnlineShop.Application.CQRS.Properties.Queries.SearchProperties
 {
-    public class SearchReviewsQueryHandler : ReviewHandler, IRequestHandler<SearchReviewsQuery, List<GetPropertyDTO>>
+    public class SearchReviewsQueryHandler : ReviewHandler, IRequestHandler<SearchReviewsQuery, List<Review>>
     {
-        public SearchReviewsQueryHandler(IRepository<Property, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public SearchReviewsQueryHandler(IRepository<Review, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<List<GetPropertyDTO>> Handle(SearchReviewsQuery request, CancellationToken cancellationToken)
+        public async Task<List<Review>> Handle(SearchReviewsQuery request, CancellationToken cancellationToken)
         {
             if (request == null || string.IsNullOrEmpty(request.Search))
             {
-                return _mapper.Map<List<GetPropertyDTO>>(await _repository.GetAllAsync());
+                return await _repository.GetAllAsync();
             }
 
             request.Search = request.Search.ToLower().Trim();
 
-            var baseResult = _mapper.Map<List<GetPropertyDTO>>(await _repository.GetQuery()
+            var baseResult = await _repository.GetQuery()
                     .AsNoTracking()
                     .Where(obj => obj.Name.ToLower().Contains(request.Search))
-                    .ToListAsync());
+                    .ToListAsync();
 
             if (request.PageSize == null || request.PageNumber == null)
             {
