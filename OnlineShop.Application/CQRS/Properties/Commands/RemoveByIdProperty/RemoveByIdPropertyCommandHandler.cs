@@ -2,7 +2,6 @@
 
 using MediatR;
 
-using OnlineShop.Application.CQRS.Payments.Commands.RemoveByIdPayment;
 using OnlineShop.Application.CQRS.Properties.Commands.RemoveProperty;
 using OnlineShop.Application.CQRS.Properties.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
