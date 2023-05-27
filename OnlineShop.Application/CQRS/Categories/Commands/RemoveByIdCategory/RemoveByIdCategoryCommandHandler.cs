@@ -2,7 +2,7 @@
 
 using MediatR;
 
-using OnlineShop.Application.CQRS.Properties.Handlers;
+using OnlineShop.Application.CQRS.Categories.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 

@@ -5,7 +5,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 using OnlineShop.Application.CQRS.Categories.DTOs;
-using OnlineShop.Application.CQRS.Properties.Handlers;
+using OnlineShop.Application.CQRS.Categories.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 

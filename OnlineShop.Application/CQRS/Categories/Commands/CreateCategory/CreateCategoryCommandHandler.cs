@@ -2,13 +2,11 @@
 
 using MediatR;
 
-using OnlineShop.Application.CQRS.Categories.Commands.CreateCategory;
-using OnlineShop.Application.CQRS.Properties.Handlers;
-using OnlineShop.Application.CQRS.Values.Handlers;
+using OnlineShop.Application.CQRS.Categories.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Properties.Commands.CreateProperty
+namespace OnlineShop.Application.CQRS.Categories.Commands.CreateCategory
 {
     public class CreateCategoryCommandHandler : CategoryHandler, IRequestHandler<CreateCategoryCommand, int>
     {
