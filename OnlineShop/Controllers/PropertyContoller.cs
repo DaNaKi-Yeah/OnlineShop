@@ -15,6 +15,7 @@ using OnlineShop.Application.CQRS.Properties.Commands.RemoveProperty;
 using OnlineShop.Application.CQRS.Properties.DTOs;
 using OnlineShop.Application.CQRS.Properties.Queries.GetProperty;
 using OnlineShop.Application.CQRS.Properties.Queries.SearchProperties;
+using OnlineShop.Application.CQRS.Reviews.DTOs;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 

@@ -3,11 +3,9 @@
 using MediatR;
 
 using Microsoft.EntityFrameworkCore;
+
 using OnlineShop.Application.CQRS.Categories.DTOs;
-using OnlineShop.Application.CQRS.Properties.DTOs;
 using OnlineShop.Application.CQRS.Properties.Handlers;
-using OnlineShop.Application.CQRS.Properties.Queries.SearchProperties;
-using OnlineShop.Application.CQRS.Values.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 

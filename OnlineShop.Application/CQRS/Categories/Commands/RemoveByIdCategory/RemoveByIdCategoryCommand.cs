@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace OnlineShop.Application.CQRS.Properties.Commands.RemoveProperty
+namespace OnlineShop.Application.CQRS.Categories.Commands.RemoveByIdCategory
 {
     public class RemoveByIdCategoryCommand : IRequest
     {

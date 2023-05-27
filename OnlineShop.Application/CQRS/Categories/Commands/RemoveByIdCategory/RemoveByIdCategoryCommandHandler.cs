@@ -2,14 +2,11 @@
 
 using MediatR;
 
-using OnlineShop.Application.CQRS.Properties.Commands.RemoveProperty;
 using OnlineShop.Application.CQRS.Properties.Handlers;
-using OnlineShop.Application.CQRS.Values.Commands.RemoveByIdValue;
-using OnlineShop.Application.CQRS.Values.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Properties.Commands.RemoveByIdProperty
+namespace OnlineShop.Application.CQRS.Categories.Commands.RemoveByIdCategory
 {
     public class RemoveByIdCategoryCommandHandler : CategoryHandler, IRequestHandler<RemoveByIdCategoryCommand>
     {
