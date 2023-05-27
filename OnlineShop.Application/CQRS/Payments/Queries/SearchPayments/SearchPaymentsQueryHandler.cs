@@ -5,27 +5,26 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 using OnlineShop.Application.CQRS.Payments.DTOs;
-using OnlineShop.Application.CQRS.Properties.DTOs;
-using OnlineShop.Application.CQRS.Properties.Handlers;
+using OnlineShop.Application.CQRS.Payments.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Properties.Queries.SearchProperties
+namespace OnlineShop.Application.CQRS.Payments.Queries.SearchPayments
 {
-    public class SearchPropertiesQueryHandler : PropertyHandler, IRequestHandler<SearchPropertiesQuery, List<GetPropertyDTO>>
+    public class SearchPaymentsQueryHandler : PaymentHandler, IRequestHandler<SearchPaymentsQuery, List<GetPaymentDTO>>
     {
-        public SearchPropertiesQueryHandler(IRepository<Property, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public SearchPaymentsQueryHandler(IRepository<Payment, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<List<GetPropertyDTO>> Handle(SearchPropertiesQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetPaymentDTO>> Handle(SearchPaymentsQuery request, CancellationToken cancellationToken)
         {
             if (request == null || string.IsNullOrEmpty(request.Search))
             {
-                return _mapper.Map<List<GetPropertyDTO>>(await _repository.GetAllAsync());
+                return _mapper.Map<List<GetPaymentDTO>>(await _repository.GetAllAsync());
             }
 
             request.Search = request.Search.ToLower().Trim();
-
-            var baseResult = _mapper.Map<List<GetPropertyDTO>>(await _repository.GetQuery()
+            
+            var baseResult = _mapper.Map<List<GetPaymentDTO>>(await _repository.GetQuery()
                     .AsNoTracking()
                     .Where(obj => obj.Name.ToLower().Contains(request.Search))
                     .ToListAsync());

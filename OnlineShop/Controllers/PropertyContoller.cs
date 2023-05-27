@@ -1,6 +1,15 @@
 ﻿using AutoMapper;
+
 using MediatR;
+
 using Microsoft.AspNetCore.Mvc;
+
+using OnlineShop.Application.CQRS.Orders.Queries.GetOrderById;
+using OnlineShop.Application.CQRS.Orders.Queries.SearchOrders;
+using OnlineShop.Application.CQRS.Payments.Commands.RemoveByIdPayment;
+using OnlineShop.Application.CQRS.Payments.DTOs;
+using OnlineShop.Application.CQRS.Payments.Queries.GetPaymentById;
+using OnlineShop.Application.CQRS.Payments.Queries.SearchPayments;
 using OnlineShop.Application.CQRS.Properties.Commands.CreateProperty;
 using OnlineShop.Application.CQRS.Properties.Commands.RemoveProperty;
 using OnlineShop.Application.CQRS.Properties.Commands.UpdateProperty;

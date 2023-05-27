@@ -1,4 +1,6 @@
 ﻿using MediatR;
+
+using OnlineShop.Application.CQRS.Payments.DTOs;
 using OnlineShop.Application.CQRS.Properties.DTOs;
 using OnlineShop.Domain.Models;
 

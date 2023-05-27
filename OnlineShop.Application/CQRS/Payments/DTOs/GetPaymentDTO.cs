@@ -11,16 +11,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop.Application.CQRS.Properties.DTOs
+namespace OnlineShop.Application.CQRS.Payments.DTOs
 {
-    public class GetPropertyDTO : IMapWith<Property>
+    public class GetPaymentDTO : IMapWith<Payment>
     {
         public int Id { get; set; }
         public string Name { get; set; }
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Property, GetPropertyDTO>()
+            profile.CreateMap<Payment, GetPropertyDTO>()
                 .ForMember(gp => gp.Id, opt => opt.MapFrom(p => p.Id))
                 .ForMember(gp => gp.Name, opt => opt.MapFrom(p => p.Name));
         }

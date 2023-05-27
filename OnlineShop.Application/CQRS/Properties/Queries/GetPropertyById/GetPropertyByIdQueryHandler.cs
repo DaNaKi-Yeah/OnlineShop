@@ -1,5 +1,8 @@
 ﻿using AutoMapper;
+
 using MediatR;
+
+using OnlineShop.Application.CQRS.Payments.DTOs;
 using OnlineShop.Application.CQRS.Properties.DTOs;
 using OnlineShop.Application.CQRS.Properties.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
