@@ -7,6 +7,6 @@ namespace OnlineShop.Domain.Models
     {
         public string Name { get; set; }
 
-        public List<PropertyValue> PropertyValues { get; set; }
+        public virtual List<PropertyValue> PropertyValues { get; set; }
     }
 }

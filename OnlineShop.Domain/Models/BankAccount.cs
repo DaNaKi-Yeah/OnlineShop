@@ -14,7 +14,7 @@ namespace OnlineShop.Domain.Models
         public string CardDataHash { get; set; }
 
         public int ClientId { get; set; }
-        public Client Client { get; set; }
-        public List<Payment> Payments { get; set; }
+        public virtual Client Client { get; set; }
+        public virtual List<Payment> Payments { get; set; }
     }
 }

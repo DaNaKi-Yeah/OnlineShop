@@ -11,9 +11,9 @@ namespace OnlineShop.Domain.Models
         public decimal Price { get; set; }
 
         public int? CategoryId { get; set; }
-        public Category? Category { get; set; }
-        public List<Review> Reviews { get; set; }
-        public List<ProductPropertyValuesInventory> ProductPropertyValuesInventories { get; set; }
-        public List<BuyItem> BuyItems { get; set; }
+        public virtual Category? Category { get; set; }
+        public virtual List<Review> Reviews { get; set; }
+        public virtual List<ProductPropertyValuesInventory> ProductPropertyValuesInventories { get; set; }
+        public virtual List<BuyItem> BuyItems { get; set; }
     }
 }

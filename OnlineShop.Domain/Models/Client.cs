@@ -4,7 +4,7 @@ namespace OnlineShop.Domain.Models
 {
     public class Client: BaseEntity<int>
     {
-        public List<Cart> Carts { get; set; }
-        public List<BankAccount> BankAccounts { get; set; }
+        public virtual List<Cart> Carts { get; set; }
+        public virtual List<BankAccount> BankAccounts { get; set; }
     }
 }

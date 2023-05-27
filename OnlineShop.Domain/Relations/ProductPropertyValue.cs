@@ -7,8 +7,8 @@ namespace OnlineShop.Domain.Relations
     public class ProductPropertyValue : BaseEntity<int>
     {
         public int? PropertyValueId { get; set; }
-        public PropertyValue? PropertyValue { get; set; }
+        public virtual PropertyValue? PropertyValue { get; set; }
         public int ProductPropertyValuesInventoryId { get; set; }
-        public ProductPropertyValuesInventory ProductPropertyValuesInventory { get; set; }
+        public virtual ProductPropertyValuesInventory ProductPropertyValuesInventory { get; set; }
     }
 }

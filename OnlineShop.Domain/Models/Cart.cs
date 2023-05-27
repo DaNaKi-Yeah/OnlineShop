@@ -20,9 +20,9 @@ namespace OnlineShop.Domain.Models
         }
 
         public int ClientId { get; set; }
-        public Client Client { get; set; }
+        public virtual Client Client { get; set; }
         public int OrderId { get; set; }
-        public Order Order { get; set; }
-        public List<BuyItem> BuyItems { get; set; }
+        public virtual Order Order { get; set; }
+        public virtual List<BuyItem> BuyItems { get; set; }
     }
 }

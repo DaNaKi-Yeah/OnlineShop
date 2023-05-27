@@ -7,8 +7,8 @@ namespace OnlineShop.Domain.Models
         public decimal TotalSum { get { return Cart.TotalSum; } }
 
         public int CartId { get; set; }
-        public Cart Cart { get; set; }
+        public virtual Cart Cart { get; set; }
         public int PaymentId { get; set; }
-        public Payment Payment { get; set; }
+        public virtual Payment Payment { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace OnlineShop.Domain.Models
         public int Count { get; set; }
 
         public int ProductId { get; set; }
-        public Product Product { get; set; }
-        public List<ProductPropertyValue> ProductPropertyValues { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual List<ProductPropertyValue> ProductPropertyValues { get; set; }
     }
 }
