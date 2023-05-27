@@ -16,7 +16,7 @@ namespace OnlineShop.Persistence
         public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration) 
         {
             string connectionString = configuration.GetConnectionString("SQLServerConnectionString");
-            services.AddDbContext<SQLServerOnlineShopDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<SQLServerOnlineShopDbContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connectionString));
             services.AddScoped(typeof(IOnlineShopDbContext), typeof(SQLServerOnlineShopDbContext));
 
             return services;
