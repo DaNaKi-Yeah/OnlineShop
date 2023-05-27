@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Application.CQRS.Properties.Commands.CreateProperty;
 using OnlineShop.Application.CQRS.Properties.Commands.RemoveProperty;
+using OnlineShop.Application.CQRS.Properties.Commands.UpdateProperty;
 using OnlineShop.Application.CQRS.Properties.DTOs;
 using OnlineShop.Application.CQRS.Properties.Queries.GetProperty;
 using OnlineShop.Application.CQRS.Properties.Queries.SearchProperties;
@@ -22,6 +23,13 @@ namespace OnlineShop.API.Controllers
             var id = await _mediator.Send(command);
 
             return id;
+        }
+
+        [HttpPut]
+        [Route("Update")]
+        public async Task Update([FromBody] UpdatePropertyCommand command)
+        {
+            await _mediator.Send(command);
         }
 
         [HttpDelete]
