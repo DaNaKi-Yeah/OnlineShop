@@ -1,12 +1,11 @@
 ﻿using MediatR;
 
-using OnlineShop.Application.CQRS.Payments.DTOs;
 using OnlineShop.Application.CQRS.Properties.DTOs;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Properties.Queries.SearchProperties
+namespace OnlineShop.Application.CQRS.Orders.Queries.SearchOrders
 {
-    public class SearchPropertiesQuery : IRequest<List<GetPropertyDTO>>
+    public class SearchOrdersQuery : IRequest<List<GetOrderDTO>>
     {
         public string? Search { get; set; }
         public int? PageNumber { get; set; }
