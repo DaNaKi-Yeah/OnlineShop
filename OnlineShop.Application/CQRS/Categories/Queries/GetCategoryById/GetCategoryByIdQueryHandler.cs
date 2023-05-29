@@ -9,11 +9,11 @@ using OnlineShop.Domain.Models;
 
 namespace OnlineShop.Application.CQRS.Categories.Queries.GetCategory
 {
-    public class GetCategoryQueryHandler : CategoryHandler, IRequestHandler<GetCategoryQuery, GetCategoryDTO>
+    public class GetCategoryByIdQueryHandler : CategoryHandler, IRequestHandler<GetCategoryByIdQuery, GetCategoryDTO>
     {
-        public GetCategoryQueryHandler(IRepository<Category, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public GetCategoryByIdQueryHandler(IRepository<Category, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<GetCategoryDTO> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
+        public async Task<GetCategoryDTO> Handle(GetCategoryByIdQuery request, CancellationToken cancellationToken)
         {
             Category category = await _repository.GetByIdAsync(request.Id);
 

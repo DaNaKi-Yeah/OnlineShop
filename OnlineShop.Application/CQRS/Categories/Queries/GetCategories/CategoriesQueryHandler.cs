@@ -11,11 +11,11 @@ using OnlineShop.Domain.Models;
 
 namespace OnlineShop.Application.CQRS.Categories.Queries.SearchCategories
 {
-    public class SearchCategoriesQueryHandler : CategoryHandler, IRequestHandler<SearchCategoriesQuery, List<GetCategoryDTO>>
+    public class CategoriesQueryHandler : CategoryHandler, IRequestHandler<GetCategoriesQuery, List<GetCategoryDTO>>
     {
-        public SearchCategoriesQueryHandler(IRepository<Category, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public CategoriesQueryHandler(IRepository<Category, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<List<GetCategoryDTO>> Handle(SearchCategoriesQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetCategoryDTO>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
             if (request == null || string.IsNullOrEmpty(request.Search))
             {
