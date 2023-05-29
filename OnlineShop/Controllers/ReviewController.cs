@@ -25,7 +25,7 @@ namespace OnlineShop.API.Controllers
         }
 
         [HttpDelete]
-        [Route("Remove")]
+        [Route("RemoveById")]
         public async Task Remove([FromQuery] RemoveByIdReviewCommand command)
         {
             await _mediator.Send(command);

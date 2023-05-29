@@ -26,7 +26,7 @@ public class CategoryController : BaseController
     }
 
     [HttpDelete]
-    [Route("Remove")]
+    [Route("RemoveById")]
     public async Task Remove([FromQuery] RemoveByIdCategoryCommand command)
     {
         await _mediator.Send(command);
