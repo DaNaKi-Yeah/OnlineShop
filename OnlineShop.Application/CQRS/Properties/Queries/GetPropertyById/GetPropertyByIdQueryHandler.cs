@@ -4,11 +4,10 @@ using MediatR;
 
 using OnlineShop.Application.CQRS.Properties.DTOs;
 using OnlineShop.Application.CQRS.Properties.Handlers;
-using OnlineShop.Application.CQRS.Reviews.DTOs;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Properties.Queries.GetProperty
+namespace OnlineShop.Application.CQRS.Properties.Queries.GetPropertyById
 {
     public class GetPropertyByIdQueryHandler : PropertyHandler, IRequestHandler<GetPropertyByIdQuery, GetPropertyDTO>
     {
