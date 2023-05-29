@@ -7,7 +7,7 @@ using OnlineShop.Application.CQRS.Categories.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Categories.Queries.GetCategory
+namespace OnlineShop.Application.CQRS.Categories.Queries.GetCategoryById
 {
     public class GetCategoryByIdQueryHandler : CategoryHandler, IRequestHandler<GetCategoryByIdQuery, GetCategoryDTO>
     {
