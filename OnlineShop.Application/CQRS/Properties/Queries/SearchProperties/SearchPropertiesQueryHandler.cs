@@ -26,7 +26,6 @@ namespace OnlineShop.Application.CQRS.Properties.Queries.SearchProperties
             request.Search = request.Search.ToLower().Trim();
 
             var baseResult = _mapper.Map<List<GetPropertyDTO>>(await _repository.GetQuery()
-                    .AsNoTracking()
                     .Where(obj => obj.Name.ToLower().Contains(request.Search))
                     .AsNoTracking()
                     .ToListAsync());
