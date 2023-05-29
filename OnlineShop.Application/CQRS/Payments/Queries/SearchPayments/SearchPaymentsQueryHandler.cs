@@ -4,6 +4,7 @@ using MediatR;
 
 using Microsoft.EntityFrameworkCore;
 
+using OnlineShop.Application.CQRS.Orders.DTOs;
 using OnlineShop.Application.CQRS.Payments.DTOs;
 using OnlineShop.Application.CQRS.Payments.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
@@ -17,17 +18,15 @@ namespace OnlineShop.Application.CQRS.Payments.Queries.SearchPayments
 
         public async Task<List<GetPaymentDTO>> Handle(SearchPaymentsQuery request, CancellationToken cancellationToken)
         {
-            if (request == null || string.IsNullOrEmpty(request.Search))
+            if (request == null || request.ClientId == 0)
             {
                 return _mapper.Map<List<GetPaymentDTO>>(await _repository.GetAllAsync());
             }
 
-            request.Search = request.Search.ToLower().Trim();
-            
-            var baseResult = _mapper.Map<List<GetPaymentDTO>>(await _repository.GetQuery()
-                    .AsNoTracking()
-                    .Where(obj => obj.Name.ToLower().Contains(request.Search))
-                    .ToListAsync());
+
+            var baseResult = _mapper.Map<List<GetPaymentDTO>>(await _repository.GetQuery().Where(x => x.Order.Cart.ClientId == request.ClientId)
+                .AsNoTracking()
+                .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)
             {
