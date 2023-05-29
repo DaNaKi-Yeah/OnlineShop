@@ -2,8 +2,8 @@
 
 using MediatR;
 
-using OnlineShop.Application.CQRS.Properties.DTOs;
-using OnlineShop.Application.CQRS.Properties.Handlers;
+using OnlineShop.Application.CQRS.Orders.DTOs;
+using OnlineShop.Application.CQRS.Orders.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 

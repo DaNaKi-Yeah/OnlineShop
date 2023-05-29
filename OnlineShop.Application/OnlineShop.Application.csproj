@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,11 +7,6 @@
     <AppDesignerFolder>2</AppDesignerFolder>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="CQRS\Properties - Copy\**" />
-    <EmbeddedResource Remove="CQRS\Properties - Copy\**" />
-    <None Remove="CQRS\Properties - Copy\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />

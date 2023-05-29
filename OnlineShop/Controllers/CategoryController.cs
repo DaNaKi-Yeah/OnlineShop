@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Application.CQRS.Categories.Commands.CreateCategory;
 using OnlineShop.Application.CQRS.Categories.Commands.RemoveByIdCategory;
 using OnlineShop.Application.CQRS.Categories.DTOs;
-using OnlineShop.Application.CQRS.Categories.Queries.GetCategory;
-using OnlineShop.Application.CQRS.Categories.Queries.SearchCategories;
+using OnlineShop.Application.CQRS.Categories.Queries.GetCategories;
+using OnlineShop.Application.CQRS.Categories.Queries.GetCategoryById;
 
 namespace OnlineShop.API.Controllers;
 public class CategoryController : BaseController
@@ -34,14 +34,14 @@ public class CategoryController : BaseController
 
     [HttpGet]
     [Route("GetById")]
-    public async Task<GetCategoryDTO> GetById([FromQuery] GetCategoryQuery command)
+    public async Task<GetCategoryDTO> GetById([FromQuery] GetCategoryByIdQuery command)
     {
         return await _mediator.Send(command);
     }
 
     [HttpGet]
     [Route("Search")]
-    public async Task<List<GetCategoryDTO>> Search([FromQuery] SearchCategoriesQuery query)
+    public async Task<List<GetCategoryDTO>> Search([FromQuery] GetCategoriesQuery query)
     {
         return await _mediator.Send(query);
     }

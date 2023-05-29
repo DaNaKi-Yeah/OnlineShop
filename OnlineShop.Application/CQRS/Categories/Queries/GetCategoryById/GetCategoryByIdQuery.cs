@@ -1,10 +1,11 @@
 ﻿using MediatR;
+
 using OnlineShop.Application.CQRS.Categories.DTOs;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Categories.Queries.GetCategory
+namespace OnlineShop.Application.CQRS.Categories.Queries.GetCategoryById
 {
-    public class GetCategoryQuery : IRequest<GetCategoryDTO>
+    public class GetCategoryByIdQuery : IRequest<GetCategoryDTO>
     {
         public int Id { get; set; }
     }

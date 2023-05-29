@@ -1,15 +1,5 @@
-﻿using AutoMapper;
-
-using OnlineShop.Application.Common.Mappings;
-using OnlineShop.Application.CQRS.PropertyValues.DTOs;
+﻿using OnlineShop.Application.Common.Mappings;
 using OnlineShop.Domain.Models;
-using OnlineShop.Domain.Relations;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineShop.Application.CQRS.Reviews.DTOs
 {
