@@ -2,6 +2,7 @@
 
 using OnlineShop.Application.Common.Mappings;
 using OnlineShop.Domain.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineShop.Application.CQRS.Properties.Commands.CreateProperty
 {
@@ -12,5 +13,7 @@ namespace OnlineShop.Application.CQRS.Properties.Commands.CreateProperty
         public string Description { get; set; }
         public string PictureLink { get; set; }
         public decimal Price { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
     }
 }
