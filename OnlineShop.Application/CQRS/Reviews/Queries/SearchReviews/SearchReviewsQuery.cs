@@ -9,7 +9,6 @@ using OnlineShop.Domain.Models;
 
 public class SearchReviewsQuery : IRequest<List<GetReviewDTO>>
 {
-    [Required]
     public int ProductId { get; set; }
     public int? PageNumber { get; set; }
     public int? PageSize { get; set; }

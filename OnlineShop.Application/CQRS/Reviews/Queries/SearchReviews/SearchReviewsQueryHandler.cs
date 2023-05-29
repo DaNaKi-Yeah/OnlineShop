@@ -19,7 +19,7 @@ namespace OnlineShop.Application.CQRS.Reviews.Queries.SearchReviews
 
         public async Task<List<GetReviewDTO>> Handle(SearchReviewsQuery request, CancellationToken cancellationToken)
         {
-            if (request == null)
+            if (request == null || request.ProductId == 0)
             {
                 return _mapper.Map<List<GetReviewDTO>>(await _repository.GetAllAsync());
             }
