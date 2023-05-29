@@ -34,14 +34,14 @@ public class CategoryController : BaseController
 
     [HttpGet]
     [Route("GetById")]
-    public async Task<GetCategoryDTO> GetById([FromQuery] GetCategoryQuery command)
+    public async Task<GetCategoryDTO> GetById([FromQuery] GetCategoryByIdQuery command)
     {
         return await _mediator.Send(command);
     }
 
     [HttpGet]
     [Route("Search")]
-    public async Task<List<GetCategoryDTO>> Search([FromQuery] SearchCategoriesQuery query)
+    public async Task<List<GetCategoryDTO>> Search([FromQuery] GetCategoriesQuery query)
     {
         return await _mediator.Send(query);
     }
