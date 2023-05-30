@@ -16,18 +16,6 @@ namespace OnlineShop.Persistence.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<PropertyValue> builder)
         {
             builder
-                .HasOne(pv => pv.Property)
-                .WithMany(p => p.PropertyValues)
-                .HasForeignKey(pv => pv.PropertyId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
-                .HasOne(pv => pv.Value)
-                .WithMany(v => v.PropertyValues)
-                .HasForeignKey(pv => pv.ValueId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
                .HasMany(p => p.ProductPropertyValues)
                .WithOne(ppv => ppv.PropertyValue)
                .HasForeignKey(ppv => ppv.PropertyValueId)
