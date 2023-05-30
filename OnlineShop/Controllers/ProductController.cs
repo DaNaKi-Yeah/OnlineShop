@@ -49,7 +49,7 @@ namespace OnlineShop.API.Controllers
         //TODO update Search with use multi filter
         [HttpGet]
         [Route("Search")]
-        public async Task<List<GetProductDTO>> Search([FromQuery] SearchProductsQuery query)
+        public async Task<List<SearchProductDTO>> Search([FromQuery] SearchProductsQuery query)
         {
             return await _mediator.Send(query);
         }
