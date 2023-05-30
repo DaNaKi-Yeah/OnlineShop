@@ -27,10 +27,10 @@ namespace OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.
                 return _mapper.Map<List<GetProductPropertyValuesInventoryDTO>>(await _repository.GetAllAsync());
             }
 
-
-            var baseResult = _mapper.Map<List<GetProductPropertyValuesInventoryDTO>>(await _repository.GetQuery()
-                    .AsNoTracking()
+            var items = (await _repository.GetQuery()
                     .ToListAsync());
+
+            var baseResult = _mapper.Map<List<GetProductPropertyValuesInventoryDTO>>(items);
 
             if (request.PageSize == null || request.PageNumber == null)
             {

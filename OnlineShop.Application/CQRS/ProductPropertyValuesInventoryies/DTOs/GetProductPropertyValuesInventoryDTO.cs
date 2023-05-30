@@ -27,7 +27,7 @@ namespace OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.DTOs
                 .ForMember(y => y.ProductId, opt => opt.MapFrom(x => x.ProductId))
                 .ForMember(y => y.ProductName, opt => opt.MapFrom(x => x.Product.ModelName ?? "Product was deleted"))
                 .ForMember(y => y.ProductCount, opt => opt.MapFrom(x => x.Count))
-                .ForMember(y => y.ProductPropertyValueDTOs, opt => opt.MapFrom(x => x.ProductPropertyValues.Count));
+                .ForMember(y => y.PropertyValuesCount, opt => opt.MapFrom(x => x.ProductPropertyValues.Count));
         }
     }
 }
