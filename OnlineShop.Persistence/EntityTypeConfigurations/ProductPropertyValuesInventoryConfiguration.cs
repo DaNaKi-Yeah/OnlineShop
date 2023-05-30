@@ -18,12 +18,6 @@ namespace OnlineShop.Persistence.EntityTypeConfigurations
                 .WithOne(pvv => pvv.ProductPropertyValuesInventory)
                 .HasForeignKey(pvv => pvv.ProductPropertyValuesInventoryId)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            builder
-               .HasOne(ppvi => ppvi.Product)
-               .WithMany(p => p.ProductPropertyValuesInventories)
-               .HasForeignKey(ppvi => ppvi.ProductId)
-               .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
