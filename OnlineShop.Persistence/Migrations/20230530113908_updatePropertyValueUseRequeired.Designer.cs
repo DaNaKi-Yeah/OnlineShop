@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Persistence.Db.SqlServer;
 
@@ -11,9 +12,11 @@ using OnlineShop.Persistence.Db.SqlServer;
 namespace OnlineShop.Persistence.Migrations
 {
     [DbContext(typeof(SQLServerOnlineShopDbContext))]
-    partial class SQLServerOnlineShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230530113908_updatePropertyValueUseRequeired")]
+    partial class updatePropertyValueUseRequeired
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -406,12 +409,14 @@ namespace OnlineShop.Persistence.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("PropertyId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("ValueId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -548,12 +553,14 @@ namespace OnlineShop.Persistence.Migrations
                     b.HasOne("OnlineShop.Domain.Models.Property", "Property")
                         .WithMany("PropertyValues")
                         .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("OnlineShop.Domain.Models.Value", "Value")
                         .WithMany("PropertyValues")
                         .HasForeignKey("ValueId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
 
                     b.Navigation("Property");
 

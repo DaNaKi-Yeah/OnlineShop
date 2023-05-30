@@ -12,8 +12,8 @@ using OnlineShop.Persistence.Db.SqlServer;
 namespace OnlineShop.Persistence.Migrations
 {
     [DbContext(typeof(SQLServerOnlineShopDbContext))]
-    [Migration("20230525154717_TrueInitDb")]
-    partial class TrueInitDb
+    [Migration("20230530115510_updateProduct")]
+    partial class updateProduct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,6 +21,9 @@ namespace OnlineShop.Persistence.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -227,7 +230,7 @@ namespace OnlineShop.Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreateDate")
@@ -498,7 +501,8 @@ namespace OnlineShop.Persistence.Migrations
                     b.HasOne("OnlineShop.Domain.Models.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });
@@ -548,7 +552,7 @@ namespace OnlineShop.Persistence.Migrations
                     b.HasOne("OnlineShop.Domain.Models.Property", "Property")
                         .WithMany("PropertyValues")
                         .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("OnlineShop.Domain.Models.Value", "Value")
                         .WithMany("PropertyValues")
