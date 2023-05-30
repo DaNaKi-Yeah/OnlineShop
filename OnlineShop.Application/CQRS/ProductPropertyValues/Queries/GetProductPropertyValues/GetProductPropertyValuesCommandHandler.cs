@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Application.CQRS.ProductPropertyValues.Queries.GetProductPropertyValues
 {
-    public class GetProductPropertyValuesCommandHandler : ProductPropertyValueHandler, IRequestHandler<GetProductPropertyValuesCommand, List<GetProductPropertyValueDTO>
+    public class GetProductPropertyValuesCommandHandler : ProductPropertyValueHandler, IRequestHandler<GetProductPropertyValuesCommand, List<GetProductPropertyValueDTO>>
     {
         public GetProductPropertyValuesCommandHandler(IRepository<ProductPropertyValue, int> repository, IMapper mapper) : base(repository, mapper) { }
         public async Task<List<GetProductPropertyValueDTO>> Handle(GetProductPropertyValuesCommand request, CancellationToken cancellationToken)
