@@ -10,6 +10,7 @@ using OnlineShop.Application.CQRS.Categories.Commands.RemoveByIdCategory;
 using OnlineShop.Application.CQRS.Categories.DTOs;
 using OnlineShop.Application.CQRS.Categories.Queries.GetCategories;
 using OnlineShop.Application.CQRS.Categories.Queries.GetCategoryById;
+using OnlineShop.Application.CQRS.Categories.Queries.GetCategoryProductsById;
 
 namespace OnlineShop.API.Controllers;
 public class CategoryController : BaseController
@@ -42,6 +43,13 @@ public class CategoryController : BaseController
     [HttpGet]
     [Route("GetAllWithPagination")]
     public async Task<List<GetCategoryDTO>> GetAll([FromQuery] GetCategoriesQuery query)
+    {
+        return await _mediator.Send(query);
+    }
+
+    [HttpGet]
+    [Route("GetCategoryProductsById")]
+    public async Task<GetCategoryProductsDTO> GetCategoryProductsById([FromQuery] GetCategoryProductsByIdQuery query)
     {
         return await _mediator.Send(query);
     }
