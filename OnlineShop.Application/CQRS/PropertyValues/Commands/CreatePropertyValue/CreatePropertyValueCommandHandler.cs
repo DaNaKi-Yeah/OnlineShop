@@ -22,7 +22,7 @@ namespace OnlineShop.Application.CQRS.PropertyValues.Commands.CreatePropertyValu
             var propertyValue = _mapper.Map<PropertyValue>(request);
 
             int id = await _repository.AddAsync(propertyValue);
-
+            //TODO check result with names
             var result = _mapper.Map<GetPropertyValueDTO>((await _repository.GetByIdAsync(id)));
 
             return result;
