@@ -25,7 +25,7 @@ namespace OnlineShop.Application.CQRS.ProductPropertyValues.Queries.GetProductPr
             }
 
 
-            var baseResult = _mapper.Map<List<GetProductPropertyValueDTO>>((await _repository.GetQuery().AsNoTracking().ToListAsync()));
+            var baseResult = _mapper.Map<List<GetProductPropertyValueDTO>>((await _repository.GetQuery().ToListAsync()));
 
             if (request.PageSize == null || request.PageNumber == null)
             {
