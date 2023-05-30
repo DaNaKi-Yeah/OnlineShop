@@ -5,7 +5,7 @@ using OnlineShop.Domain.Models;
 
 namespace OnlineShop.Application.CQRS.Products.Queries.SearchProducts
 {
-    public class SearchProductsQuery : IRequest<List<GetProductDTO>>
+    public class SearchProductsQuery : IRequest<List<SearchProductDTO>>
     {
         public string? Search { get; set; }
         public int? PageNumber { get; set; }
