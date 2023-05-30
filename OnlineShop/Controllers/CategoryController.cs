@@ -40,8 +40,8 @@ public class CategoryController : BaseController
     }
 
     [HttpGet]
-    [Route("Search")]
-    public async Task<List<GetCategoryDTO>> Search([FromQuery] GetCategoriesQuery query)
+    [Route("GetAllWithPagination")]
+    public async Task<List<GetCategoryDTO>> GetAll([FromQuery] GetCategoriesQuery query)
     {
         return await _mediator.Send(query);
     }
