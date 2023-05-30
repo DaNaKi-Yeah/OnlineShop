@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Commands.CreateProductPropertyValuesInventory;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Commands.RemoveProductPropertyValuesInventoryById;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.DTOs;
+using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.GetProductPropertyValuesInventories;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.GetProductPropertyValuesInventoryById;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.SearchProductPropertyValuesInventories;
 
@@ -40,7 +41,7 @@ namespace OnlineShop.API.Controllers
 
         [HttpGet]
         [Route("GetAllWithPagination")]
-        public async Task<GetProductPropertyValuesInventoryDTO> GetAll([FromQuery] GetProductPropertyValuesInventoryByIdCommand query)
+        public async Task<List<GetProductPropertyValuesInventoryDTO>> GetAll([FromQuery] GetProductPropertyValuesInventoriesQuery query)
         {
             var result = await _mediator.Send(query);
 
