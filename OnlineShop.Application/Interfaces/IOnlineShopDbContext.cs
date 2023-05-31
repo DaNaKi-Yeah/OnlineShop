@@ -12,6 +12,7 @@ namespace OnlineShop.Application.Interfaces
     public interface IOnlineShopDbContext
     {
         DbSet<BuyItem> BuyItems { get; set; }
+        DbSet<CategoryProperty> CategoryProperties { get; set; }
         DbSet<Cart> Carts { get; set; }
         DbSet<Category> Categories { get; set; }
         DbSet<Client> Clients { get; set; }
