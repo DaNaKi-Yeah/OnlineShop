@@ -25,7 +25,6 @@ namespace OnlineShop.Application.CQRS.Payments.Queries.SearchPayments
 
 
             var baseResult = _mapper.Map<List<GetPaymentDTO>>(await _repository.GetQuery().Where(x => x.Order.Cart.ClientId == request.ClientId)
-                .AsNoTracking()
                 .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)

@@ -23,7 +23,6 @@ namespace OnlineShop.Application.CQRS.Categories.Queries.GetCategories
             }
 
             var baseResult = _mapper.Map<List<GetCategoryDTO>>(await _repository.GetQuery()
-                    .AsNoTracking()
                     .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)
