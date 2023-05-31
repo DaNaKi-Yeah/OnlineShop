@@ -8,7 +8,6 @@ namespace OnlineShop.Application.CQRS.Products.DTOs
     {
         public int Id { get; set; }
         public string ModelName { get; set; }
-        public string Description { get; set; }
         public string PictureLink { get; set; }
         public decimal Price { get; set; }
         //TODO average rating
@@ -17,7 +16,6 @@ namespace OnlineShop.Application.CQRS.Products.DTOs
             profile.CreateMap<Product, SearchProductDTO>()
                 .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
                 .ForMember(x => x.ModelName, opt => opt.MapFrom(y => y.ModelName))
-                .ForMember(x => x.Description, opt => opt.MapFrom(y => y.Description))
                 .ForMember(x => x.PictureLink, opt => opt.MapFrom(y => y.PictureLink))
                 .ForMember(x => x.Price, opt => opt.MapFrom(y => y.Price));
         }
