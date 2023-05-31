@@ -27,7 +27,6 @@ namespace OnlineShop.Application.CQRS.Properties.Queries.SearchProperties
 
             var baseResult = _mapper.Map<List<GetPropertyDTO>>(await _repository.GetQuery()
                     .Where(obj => obj.Name.ToLower().Contains(request.Search))
-                    .AsNoTracking()
                     .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)

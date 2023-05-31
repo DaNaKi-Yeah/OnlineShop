@@ -25,9 +25,7 @@ namespace OnlineShop.Application.CQRS.Values.Queries.SearchValues
             request.Search = request.Search.ToLower().Trim();
 
             var baseResult = _mapper.Map<List<GetValueDTO>>(await _repository.GetQuery()
-                    .AsNoTracking()
                     .Where(obj => obj.Name.ToLower().Contains(request.Search))
-                    .AsNoTracking()
                     .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)
