@@ -16,6 +16,7 @@ namespace OnlineShop.Persistence.Db.SqlServer
     public class SQLServerOnlineShopDbContext : DbContext, IOnlineShopDbContext
     {
         public DbSet<BuyItem> BuyItems { get; set; }
+        public DbSet<CategoryProperty> CategoryProperties { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Client> Clients { get; set; }
