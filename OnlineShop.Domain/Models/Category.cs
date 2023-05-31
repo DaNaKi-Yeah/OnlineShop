@@ -1,4 +1,5 @@
 ﻿using OnlineShop.Domain.Common;
+using OnlineShop.Domain.Relations;
 
 namespace OnlineShop.Domain.Models
 {
@@ -6,6 +7,7 @@ namespace OnlineShop.Domain.Models
     {
         public string Name { get; set; }
 
+        public virtual List<CategoryProperty> CategoryProperties { get; set; }
         public virtual List<Product> Products { get; set; }
     }
 }
