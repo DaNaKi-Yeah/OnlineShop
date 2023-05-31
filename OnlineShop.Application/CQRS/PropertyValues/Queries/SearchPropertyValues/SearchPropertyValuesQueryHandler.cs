@@ -34,13 +34,11 @@ namespace OnlineShop.Application.CQRS.PropertyValues.Queries.SearchPropertyValue
             {
                 propertyValues = await _repository.GetQuery()
                     .Where(obj => obj.Property.Name.ToLower().Contains(request.Search))
-                    .AsNoTracking()
                     .ToListAsync();
             }
             else if (request.SearchPropertyValuesByName == SearchPropertyValuesByName.Value)
             {
                 propertyValues = await _repository.GetQuery()
-                    .AsNoTracking()
                     .Where(obj => obj.Value.Name.ToLower().Contains(request.Search))
                     .ToListAsync();
             }
