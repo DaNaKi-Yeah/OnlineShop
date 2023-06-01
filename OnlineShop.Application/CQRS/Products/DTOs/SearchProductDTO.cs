@@ -10,14 +10,18 @@ namespace OnlineShop.Application.CQRS.Products.DTOs
         public string ModelName { get; set; }
         public string PictureLink { get; set; }
         public decimal Price { get; set; }
-        //TODO average rating
+        public string AverageRating { get; set; } 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Product, SearchProductDTO>()
                 .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
                 .ForMember(x => x.ModelName, opt => opt.MapFrom(y => y.ModelName))
                 .ForMember(x => x.PictureLink, opt => opt.MapFrom(y => y.PictureLink))
-                .ForMember(x => x.Price, opt => opt.MapFrom(y => y.Price));
+                .ForMember(x => x.Price, opt => opt.MapFrom(y => y.Price))
+                .ForMember(x => x.AverageRating, opt => opt.MapFrom(
+                    y => y.Reviews.Count != 0
+                        ? Math.Round((double)(y.Reviews.Select(r => r.Rating).Sum()) / (double)y.Reviews.Count, 1).ToString()
+                        : "no reviews"));
         }
     }
 }
