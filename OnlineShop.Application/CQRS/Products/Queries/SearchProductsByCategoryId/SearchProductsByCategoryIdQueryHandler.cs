@@ -9,23 +9,21 @@ using OnlineShop.Application.CQRS.Products.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Products.Queries.SearchProducts
+namespace OnlineShop.Application.CQRS.Products.Queries.SearchProductsByCategoryId
 {
-    public class SearchProductsQueryHandler : ProductHandler, IRequestHandler<SearchProductsQuery, List<SearchProductDTO>>
+    public class SearchProductsByCategoryIdQueryHandler : ProductHandler, IRequestHandler<SearchProductsByCategoryIdQuery, List<SearchProductDTO>>
     {
-        public SearchProductsQueryHandler(IRepository<Product, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public SearchProductsByCategoryIdQueryHandler(IRepository<Product, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<List<SearchProductDTO>> Handle(SearchProductsQuery request, CancellationToken cancellationToken)
+        public async Task<List<SearchProductDTO>> Handle(SearchProductsByCategoryIdQuery request, CancellationToken cancellationToken)
         {
-            if (request == null || string.IsNullOrEmpty(request.Search))
+            if (request == null || request.CategoryId == 0)
             {
                 return _mapper.Map<List<SearchProductDTO>>(await _repository.GetAllAsync());
             }
 
-            request.Search = request.Search.ToLower().Trim();
-
             var baseResult = _mapper.Map<List<SearchProductDTO>>(await _repository.GetQuery()
-                    .Where(obj => obj.ModelName.ToLower().Contains(request.Search))
+                    .Where(obj => obj.CategoryId == request.CategoryId)
                     .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)
