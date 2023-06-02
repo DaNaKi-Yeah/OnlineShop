@@ -9,6 +9,7 @@ namespace OnlineShop.Application.CQRS.Products.Queries.SearchProductsByCategoryI
 {
     public class SearchProductsByCategoryIdQuery : IRequest<List<SearchProductDTO>>
     {
+        [Required]
         public int CategoryId { get; set; }
         public int? PageNumber { get; set; }
         public int? PageSize { get; set; }
