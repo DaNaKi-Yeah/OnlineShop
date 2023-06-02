@@ -20,9 +20,9 @@ namespace OnlineShop.Persistence.EntityTypeConfigurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder
-                .HasOne(c => c.Client)
+                .HasOne(c => c.User)
                 .WithMany(c => c.Carts)
-                .HasForeignKey(c => c.ClientId)
+                .HasForeignKey(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder

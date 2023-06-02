@@ -23,7 +23,7 @@ namespace OnlineShop.Application.CQRS.Orders.Queries.GetOrders
             }
 
 
-            var baseResult = _mapper.Map<List<GetOrderDTO>>(await _repository.GetQuery().Where(x => x.Cart.ClientId == request.ClientId)
+            var baseResult = _mapper.Map<List<GetOrderDTO>>(await _repository.GetQuery().Where(x => x.Cart.UserId == request.ClientId)
                 .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Application.Interfaces;
 using OnlineShop.Domain.Common;
 using OnlineShop.Domain.Models;
@@ -13,13 +14,12 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Persistence.Db.SqlServer
 {
-    public class SQLServerOnlineShopDbContext : DbContext, IOnlineShopDbContext
+    public class SQLServerOnlineShopDbContext : IdentityDbContext<User, Role, int>, IOnlineShopDbContext
     {
         public DbSet<BuyItem> BuyItems { get; set; }
         public DbSet<CategoryProperty> CategoryProperties { get; set; }
         public DbSet<Cart> Carts { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Client> Clients { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Product> Products { get; set; }
