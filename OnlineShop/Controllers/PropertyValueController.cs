@@ -5,6 +5,7 @@ using OnlineShop.Application.CQRS.PropertyValues.Commands.CreatePropertyValue;
 using OnlineShop.Application.CQRS.PropertyValues.Commands.RemoveByIdPropertyValue;
 using OnlineShop.Application.CQRS.PropertyValues.DTOs;
 using OnlineShop.Application.CQRS.PropertyValues.Queries.GetPropertyValueById;
+using OnlineShop.Application.CQRS.PropertyValues.Queries.GetPropertyValueIdsByCategoryId;
 using OnlineShop.Application.CQRS.PropertyValues.Queries.GetPropertyValuesByCategoryId;
 using OnlineShop.Application.CQRS.PropertyValues.Queries.SearchPropertyValues;
 
@@ -42,6 +43,15 @@ namespace OnlineShop.API.Controllers
         [HttpGet]
         [Route("GetPropertyValuesByCategoryId")]
         public async Task<List<GetPropertyValueDTO>> GetById([FromQuery] GetPropertyValuesByCategoryIdQuery query)
+        {
+            var result = await _mediator.Send(query);
+
+            return result;
+        }
+
+        [HttpGet]
+        [Route("GetPropertyValueIdsByCategoryId")]
+        public async Task<List<int>> GetById([FromQuery] GetPropertyValueIdsByCategoryIdQuery query)
         {
             var result = await _mediator.Send(query);
 
