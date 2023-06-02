@@ -48,7 +48,7 @@ namespace OnlineShop.Application.CQRS.Products.Queries.SearchProductsWithFilters
 
                     var intersect = ids.Intersect(propValueIds);
 
-                    if (intersect.Count() == ids.Count())
+                    if (intersect.Count() == ids.Count() && product.CategoryId == request.CategoryId)
                     {
                         result.Add(product);
                         break;
