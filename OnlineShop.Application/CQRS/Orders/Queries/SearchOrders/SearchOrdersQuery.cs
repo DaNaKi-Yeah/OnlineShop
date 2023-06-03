@@ -7,7 +7,7 @@ namespace OnlineShop.Application.CQRS.Orders.Queries.GetOrders
 {
     public class SearchOrdersQuery : IRequest<List<GetOrderDTO>>
     {
-        public int ClientId { get; set; }
+        public int UserId { get; set; }
         public int? PageNumber { get; set; }
         public int? PageSize { get; set; }
     }

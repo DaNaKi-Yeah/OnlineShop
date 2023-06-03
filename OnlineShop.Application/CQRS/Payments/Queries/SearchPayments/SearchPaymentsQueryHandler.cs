@@ -18,13 +18,13 @@ namespace OnlineShop.Application.CQRS.Payments.Queries.SearchPayments
 
         public async Task<List<GetPaymentDTO>> Handle(SearchPaymentsQuery request, CancellationToken cancellationToken)
         {
-            if (request == null || request.ClientId == 0)
+            if (request == null || request.UserId == 0)
             {
                 return _mapper.Map<List<GetPaymentDTO>>(await _repository.GetAllAsync());
             }
 
 
-            var baseResult = _mapper.Map<List<GetPaymentDTO>>(await _repository.GetQuery().Where(x => x.Order.Cart.ClientId == request.ClientId)
+            var baseResult = _mapper.Map<List<GetPaymentDTO>>(await _repository.GetQuery().Where(x => x.Order.Cart.UserId == request.UserId)
                 .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)

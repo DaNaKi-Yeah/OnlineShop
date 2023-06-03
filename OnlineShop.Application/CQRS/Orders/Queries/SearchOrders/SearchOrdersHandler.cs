@@ -17,13 +17,13 @@ namespace OnlineShop.Application.CQRS.Orders.Queries.GetOrders
 
         public async Task<List<GetOrderDTO>> Handle(SearchOrdersQuery request, CancellationToken cancellationToken)
         {
-            if (request == null || request.ClientId == 0)
+            if (request == null || request.UserId == 0)
             {
                 return _mapper.Map<List<GetOrderDTO>>(await _repository.GetAllAsync());
             }
 
 
-            var baseResult = _mapper.Map<List<GetOrderDTO>>(await _repository.GetQuery().Where(x => x.Cart.ClientId == request.ClientId)
+            var baseResult = _mapper.Map<List<GetOrderDTO>>(await _repository.GetQuery().Where(x => x.Cart.UserId == request.UserId)
                 .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)
