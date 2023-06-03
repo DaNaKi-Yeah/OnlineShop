@@ -10,13 +10,13 @@ using OnlineShop.Application.CQRS.Payments.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Payments.Queries.SearchPayments
+namespace OnlineShop.Application.CQRS.Payments.Queries.SearchPaymentsByUserId
 {
-    public class SearchPaymentsQueryHandler : PaymentHandler, IRequestHandler<SearchPaymentsQuery, List<GetPaymentDTO>>
+    public class SearchPaymentsByUserIdQueryHandler : PaymentHandler, IRequestHandler<SearchPaymentsByUserIdQuery, List<GetPaymentDTO>>
     {
-        public SearchPaymentsQueryHandler(IRepository<Payment, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public SearchPaymentsByUserIdQueryHandler(IRepository<Payment, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<List<GetPaymentDTO>> Handle(SearchPaymentsQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetPaymentDTO>> Handle(SearchPaymentsByUserIdQuery request, CancellationToken cancellationToken)
         {
             if (request == null || request.UserId == 0)
             {

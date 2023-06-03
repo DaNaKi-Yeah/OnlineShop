@@ -2,9 +2,9 @@
 
 using OnlineShop.Application.CQRS.Payments.DTOs;
 
-namespace OnlineShop.Application.CQRS.Payments.Queries.SearchPayments
+namespace OnlineShop.Application.CQRS.Payments.Queries.SearchPaymentsByUserId
 {
-    public class SearchPaymentsQuery : IRequest<List<GetPaymentDTO>>
+    public class SearchPaymentsByUserIdQuery : IRequest<List<GetPaymentDTO>>
     {
         public int UserId { get; set; }
         public int? PageNumber { get; set; }
