@@ -13,19 +13,17 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Application.CQRS.PropertyValues.Commands.CreatePropertyValue
 {
-    public class CreatePropertyValueCommandHandler : PropertyValueHandler, IRequestHandler<CreatePropertyValueCommand, GetPropertyValueDTO>
+    public class CreatePropertyValueCommandHandler : PropertyValueHandler, IRequestHandler<CreatePropertyValueCommand, int>
     {
         public CreatePropertyValueCommandHandler(IRepository<PropertyValue, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<GetPropertyValueDTO> Handle(CreatePropertyValueCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreatePropertyValueCommand request, CancellationToken cancellationToken)
         {
             var propertyValue = _mapper.Map<PropertyValue>(request);
 
             int id = await _repository.AddAsync(propertyValue);
-            //TODO check result with names
-            var result = _mapper.Map<GetPropertyValueDTO>((await _repository.GetByIdAsync(id)));
 
-            return result;
+            return id;
         }
     }
 }

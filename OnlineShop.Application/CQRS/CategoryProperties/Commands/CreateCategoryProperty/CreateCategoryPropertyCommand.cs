@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Application.CQRS.CategoryProperties.Commands.CreateCategoryProperty
 {
-    public class CreateCategoryPropertyCommand : IRequest<GetCategoryPropertyDTO>, IMapWith<CategoryProperty>
+    public class CreateCategoryPropertyCommand : IRequest<int>, IMapWith<CategoryProperty>
     {
         [Required]
         public int CategoryId { get; set; }

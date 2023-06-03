@@ -17,7 +17,7 @@ namespace OnlineShop.API.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public async Task<GetPropertyValueDTO> Create([FromBody] CreatePropertyValueCommand command)
+        public async Task<int> Create([FromBody] CreatePropertyValueCommand command)
         {
             var result = await _mediator.Send(command);
 
