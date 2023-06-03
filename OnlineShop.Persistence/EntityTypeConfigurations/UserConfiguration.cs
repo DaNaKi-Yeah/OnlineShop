@@ -9,20 +9,20 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Persistence.EntityTypeConfigurations
 {
-    public class ClientConfiguration : IEntityTypeConfiguration<Client>
+    public class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Client> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder
-                .HasMany(c => c.Carts)
-                .WithOne(c => c.Client)
-                .HasForeignKey(c => c.ClientId)
+                .HasOne(c => c.Cart)
+                .WithOne(u => u.User)
+                .HasForeignKey<User>(u => u.CartId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder
                 .HasMany(c => c.BankAccounts)
-                .WithOne(ba => ba.Client)
-                .HasForeignKey(ba => ba.ClientId)
+                .WithOne(ba => ba.User)
+                .HasForeignKey(ba => ba.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
