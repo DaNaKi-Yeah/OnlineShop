@@ -3,9 +3,9 @@
 using OnlineShop.Application.CQRS.Orders.DTOs;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Orders.Queries.GetOrders
+namespace OnlineShop.Application.CQRS.Orders.Queries.SearchOrdersByUserId
 {
-    public class SearchOrdersQuery : IRequest<List<GetOrderDTO>>
+    public class SearchOrdersByUserIdQuery : IRequest<List<SearchOrderDTO>>
     {
         public int UserId { get; set; }
         public int? PageNumber { get; set; }

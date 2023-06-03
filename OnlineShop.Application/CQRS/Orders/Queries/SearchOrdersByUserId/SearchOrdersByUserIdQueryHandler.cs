@@ -9,21 +9,21 @@ using OnlineShop.Application.CQRS.Orders.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Orders.Queries.GetOrders
+namespace OnlineShop.Application.CQRS.Orders.Queries.SearchOrdersByUserId
 {
-    public class SearchOrdersHandler : OrderHandler, IRequestHandler<SearchOrdersQuery, List<GetOrderDTO>>
+    public class SearchOrdersByUserIdQueryHandler : OrderHandler, IRequestHandler<SearchOrdersByUserIdQuery, List<SearchOrderDTO>>
     {
-        public SearchOrdersHandler(IRepository<Order, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public SearchOrdersByUserIdQueryHandler(IRepository<Order, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<List<GetOrderDTO>> Handle(SearchOrdersQuery request, CancellationToken cancellationToken)
+        public async Task<List<SearchOrderDTO>> Handle(SearchOrdersByUserIdQuery request, CancellationToken cancellationToken)
         {
             if (request == null || request.UserId == 0)
             {
-                return _mapper.Map<List<GetOrderDTO>>(await _repository.GetAllAsync());
+                return _mapper.Map<List<SearchOrderDTO>>(await _repository.GetAllAsync());
             }
 
 
-            var baseResult = _mapper.Map<List<GetOrderDTO>>(await _repository.GetQuery().Where(x => x.Cart.UserId == request.UserId)
+            var baseResult = _mapper.Map<List<SearchOrderDTO>>(await _repository.GetQuery().Where(x => x.Cart.UserId == request.UserId)
                 .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)

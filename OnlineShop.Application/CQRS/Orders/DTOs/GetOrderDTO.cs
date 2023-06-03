@@ -8,6 +8,7 @@ namespace OnlineShop.Application.CQRS.Orders.DTOs
     public class GetOrderDTO : IMapWith<Order>
     {
         public int Id { get; set; }
+        public int PaymentId { get; set; }
         public decimal TotalSum { get; set; }
     }
 }
