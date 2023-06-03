@@ -15,7 +15,7 @@ namespace OnlineShop.Application.Interfaces
         DbSet<CategoryProperty> CategoryProperties { get; set; }
         DbSet<Cart> Carts { get; set; }
         DbSet<Category> Categories { get; set; }
-        DbSet<Client> Clients { get; set; }
+        DbSet<User> Users { get; set; }
         DbSet<Order> Orders { get; set; }
         DbSet<Payment> Payments { get; set; }
         DbSet<Product> Products { get; set; }
