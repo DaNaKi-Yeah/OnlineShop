@@ -12,7 +12,7 @@ namespace OnlineShop.Domain.Models
 
                 foreach (var item in BuyItems)
                 {
-                    sum += item.Product.Price * item.Count;
+                    sum += item.ProductPropertyValuesInventory.Product.Price * item.Count;
                 }
 
                 return sum;
