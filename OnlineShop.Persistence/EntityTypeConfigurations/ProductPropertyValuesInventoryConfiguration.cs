@@ -23,7 +23,7 @@ namespace OnlineShop.Persistence.EntityTypeConfigurations
                .HasMany(p => p.BuyItems)
                .WithOne(bi => bi.ProductPropertyValuesInventory)
                .HasForeignKey(bi => bi.ProductPropertyValuesInventoryId)
-               .OnDelete(DeleteBehavior.Cascade);
+               .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
