@@ -8,7 +8,7 @@ namespace OnlineShop.Domain.Models
 
         public int CartId { get; set; }
         public virtual Cart Cart { get; set; }
-        public int PaymentId { get; set; }
+        public int? PaymentId { get; set; }
         public virtual Payment Payment { get; set; }
     }
 }
