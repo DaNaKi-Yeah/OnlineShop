@@ -10,5 +10,6 @@ namespace OnlineShop.Domain.Models
         public int ProductId { get; set; }
         public virtual Product Product { get; set; }
         public virtual List<ProductPropertyValue> ProductPropertyValues { get; set; }
+         public virtual List<BuyItem> BuyItems { get; set; }
     }
 }

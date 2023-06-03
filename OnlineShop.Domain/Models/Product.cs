@@ -14,6 +14,5 @@ namespace OnlineShop.Domain.Models
         public virtual Category? Category { get; set; }
         public virtual List<Review> Reviews { get; set; }
         public virtual List<ProductPropertyValuesInventory> ProductPropertyValuesInventories { get; set; }
-        public virtual List<BuyItem> BuyItems { get; set; }
     }
 }

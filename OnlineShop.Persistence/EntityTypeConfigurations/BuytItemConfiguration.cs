@@ -9,12 +9,6 @@ namespace OnlineShop.Persistence.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<BuyItem> builder)
         {
             builder
-                .HasOne(bi => bi.Product)
-                .WithMany(p => p.BuyItems)
-                .HasForeignKey(bi => bi.ProductId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
                 .HasOne(bi => bi.Cart)
                 .WithMany(c => c.BuyItems)
                 .HasForeignKey(bi => bi.CartId)
