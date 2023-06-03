@@ -21,5 +21,7 @@ namespace OnlineShop.Application.CQRS.Products.Commands.UpdateProduct
         public string Description { get; set; }
         public string PictureLink { get; set; }
         public decimal Price { get; set; }
+        [Required]
+        public int CategoryId { get; set; }
     }
 }
