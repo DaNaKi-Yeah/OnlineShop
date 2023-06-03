@@ -19,7 +19,7 @@ namespace OnlineShop.Domain.Models
             }
         }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public virtual User User { get; set; }
         public int? OrderId { get; set; }
         public virtual Order Order { get; set; }
