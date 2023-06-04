@@ -6,7 +6,7 @@ using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Commands.Rem
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.DTOs;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.GetProductPropertyValuesInventories;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.GetProductPropertyValuesInventoryById;
-using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.SearchProductPropertyValuesInventories;
+using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.SearchProductPropertyValuesInventoriesByProductId;
 
 namespace OnlineShop.API.Controllers
 {
@@ -49,8 +49,8 @@ namespace OnlineShop.API.Controllers
         }
 
         [HttpGet]
-        [Route("Search")]
-        public async Task<List<GetProductPropertyValuesInventoryDTO>> Search([FromQuery] SearchProductPropertyValuesInventoriesQuery query)
+        [Route("SearchByProductId")]
+        public async Task<List<GetProductPropertyValuesInventoryDTO>> Search([FromQuery] SearchProductPropertyValuesInventoriesByProductIdQuery query)
         {
             var result = await _mediator.Send(query);
 
