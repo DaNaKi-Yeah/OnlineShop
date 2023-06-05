@@ -1,11 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Text;
+
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 
 using OnlineShop.Application.Interfaces;
 using OnlineShop.Domain.Models;
 using OnlineShop.Persistence.Db.SqlServer;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 
 namespace OnlineShop.Persistence
 {
@@ -17,14 +22,7 @@ namespace OnlineShop.Persistence
             services.AddDbContext<SQLServerOnlineShopDbContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connectionString));
             services.AddScoped(typeof(IOnlineShopDbContext), typeof(SQLServerOnlineShopDbContext));
 
-
-            services.AddIdentityCore<User>()
-                .AddRoles<Role>()
-                .AddDefaultTokenProviders()
-                .AddUserManager<User>()
-                .AddRoleManager<Role>()
-                .AddEntityFrameworkStores<SQLServerOnlineShopDbContext>();
-
+          
             return services;
         }
 

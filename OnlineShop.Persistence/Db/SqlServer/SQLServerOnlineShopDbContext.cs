@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+
 using OnlineShop.Application.Interfaces;
 using OnlineShop.Domain.Common;
 using OnlineShop.Domain.Models;
 using OnlineShop.Domain.Relations;
 using OnlineShop.Persistence.EntityTypeConfigurations;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +17,13 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Persistence.Db.SqlServer
 {
-    public class SQLServerOnlineShopDbContext : IdentityDbContext<User, Role, int>, IOnlineShopDbContext
+    public class SQLServerOnlineShopDbContext : IdentityDbContext<User, IdentityRole<int>, int>, IOnlineShopDbContext
     {
+        public SQLServerOnlineShopDbContext(DbContextOptions<SQLServerOnlineShopDbContext> options)
+        : base(options)
+        {
+            Database.Migrate();
+        }
         public DbSet<BuyItem> BuyItems { get; set; }
         public DbSet<CategoryProperty> CategoryProperties { get; set; }
         public DbSet<Cart> Carts { get; set; }
@@ -29,6 +37,7 @@ namespace OnlineShop.Persistence.Db.SqlServer
         public DbSet<Value> Values { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public SQLServerOnlineShopDbContext(DbContextOptions options) : base(options) { }
 

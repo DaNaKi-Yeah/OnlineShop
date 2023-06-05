@@ -8,5 +8,7 @@ namespace OnlineShop.Domain.Models
     {
         public virtual List<Cart> Carts { get; set; }
         public virtual List<BankAccount> BankAccounts { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }
