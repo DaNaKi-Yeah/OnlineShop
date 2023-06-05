@@ -15,6 +15,7 @@ namespace OnlineShop.Application.Interfaces
         DbSet<CategoryProperty> CategoryProperties { get; set; }
         DbSet<Cart> Carts { get; set; }
         DbSet<Category> Categories { get; set; }
+        DbSet<Client> Clients { get; set; }
         DbSet<Order> Orders { get; set; }
         DbSet<Payment> Payments { get; set; }
         DbSet<Product> Products { get; set; }
@@ -24,8 +25,6 @@ namespace OnlineShop.Application.Interfaces
         DbSet<Value> Values { get; set; }
         DbSet<Property> Properties { get; set; }
         DbSet<BankAccount> BankAccounts { get; set; }
-        DbSet<User> Users { get; set; }
-        DbSet<Role> Roles { get; set; }
 
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         int SaveChanges();

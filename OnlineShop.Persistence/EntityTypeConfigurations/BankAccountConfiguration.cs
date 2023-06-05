@@ -14,9 +14,9 @@ namespace OnlineShop.Persistence.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<BankAccount> builder)
         {
             builder
-                .HasOne(ba => ba.User)
+                .HasOne(ba => ba.Client)
                 .WithMany(c => c.BankAccounts)
-                .HasForeignKey(ba => ba.UserId)
+                .HasForeignKey(ba => ba.ClientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder
