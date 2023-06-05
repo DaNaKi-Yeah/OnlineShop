@@ -25,8 +25,9 @@ namespace OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.DTOs
             profile.CreateMap<ProductPropertyValuesInventory, GetProductPropertyValuesInventoryDTO>()
                 .ForMember(y => y.Id, opt => opt.MapFrom(x => x.Id))
                 .ForMember(y => y.ProductId, opt => opt.MapFrom(x => x.ProductId))
-                .ForMember(y => y.ProductName, opt => opt.MapFrom(x => x.Product.ModelName ?? "Product was deleted"))
-                .ForMember(y => y.ProductCount, opt => opt.MapFrom(x => x.Count))
+                .ForMember(y => y.ProductName, opt => opt.MapFrom(x => x.Product.ModelName))
+                //.ForMember(y => y.ProductName, opt => opt.MapFrom(x => x.Product.ModelName ?? "Product was deleted")) //TODO return null
+                //.ForMember(y => y.ProductCount, opt => opt.MapFrom(x => x.Count)) //TODO not mapping
                 .ForMember(y => y.PropertyValuesCount, opt => opt.MapFrom(x => x.ProductPropertyValues.Count));
         }
     }
