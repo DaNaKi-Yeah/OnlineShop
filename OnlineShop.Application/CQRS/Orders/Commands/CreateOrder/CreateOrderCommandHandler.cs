@@ -11,11 +11,13 @@ namespace OnlineShop.Application.CQRS.Orders.Commands.CreateOrder
     public class CreateOrderCommandHandler : OrderHandler, IRequestHandler<CreateOrderCommand, int>
     {
         private readonly IRepository<Cart, int> _cartRepository;
+        private readonly IRepository<User, int> _userRepository;
         private readonly IRepository<Payment, int> _paymentRepository;
         private readonly IRepository<BuyItem, int> _buyItemRepository;
         public CreateOrderCommandHandler
             (IRepository<Order, int> repository,
             IRepository<Cart, int> cartRepository,
+            IRepository<User, int> userRepository,
             IRepository<Payment, int> paymentRepository,
             IRepository<BuyItem, int> buyItemRepository,
             IMapper mapper)
@@ -24,12 +26,13 @@ namespace OnlineShop.Application.CQRS.Orders.Commands.CreateOrder
             _cartRepository = cartRepository;
             _paymentRepository = paymentRepository;
             _buyItemRepository = buyItemRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<int> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             var userId = request.UserId;
-            var cartOut = await _cartRepository.GetByIdAsync(request.CartId);
+            var cartOut = await _cartRepository.GetByIdAsync((int)(await _userRepository.GetByIdAsync(request.UserId)).CartId);
             var buyItemIds = request.BuyItemIds;
             var bankAccountId = request.BankAccountId;
 
