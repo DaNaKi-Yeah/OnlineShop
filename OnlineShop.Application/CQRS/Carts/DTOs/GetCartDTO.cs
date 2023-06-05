@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OnlineShop.Application.Common.Mappings;
+using OnlineShop.Application.CQRS.BuyItems.DTOs;
 using OnlineShop.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace OnlineShop.Application.CQRS.Carts.DTOs
         public int? UserId { get; set; }
         public decimal TotalSum { get; set; }
         public int BuyItemsCount { get; set; }
+        public List<GetBuyItemDTO> BuyItems { get; set; }
 
         public void Mapping(Profile profile)
         {
