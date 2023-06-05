@@ -18,8 +18,7 @@ namespace OnlineShop.Application.CQRS.BuyItems.DTOs
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<ProductPropertyValuesInventory, GetProductPropertyValuesInventoryDTO>()
-                .ForMember(y => y.Id, opt => opt.MapFrom(x => x.Id))
+            profile.CreateMap<ProductPropertyValuesInventory, GetBuyItemProductPropertyValuesInventoryDTO>()
                 .ForMember(y => y.PropertyValuesCount, opt => opt.MapFrom(x => x.ProductPropertyValues.Count));
         }
     }
