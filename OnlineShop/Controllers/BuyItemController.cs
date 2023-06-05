@@ -14,7 +14,7 @@ namespace OnlineShop.API.Controllers
     public class BuyItemController : BaseController
     {
         public BuyItemController(IMediator mediator, IMapper mapper) : base(mediator, mapper) { }
-
+        //TODO throw new exep count BuyItem > Inventory.Count
         [HttpPost]
         [Route("Create")]
         public async Task<int> Create([FromBody] CreateBuyItemCommand command)
