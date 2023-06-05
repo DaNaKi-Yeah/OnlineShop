@@ -5,6 +5,7 @@ using OnlineShop.Application.CQRS.BuyItems.Commands.CreateBuyItem;
 using OnlineShop.Application.CQRS.BuyItems.Commands.RemoveBuyItemById;
 using OnlineShop.Application.CQRS.BuyItems.Commands.UpdateBuyItem;
 using OnlineShop.Application.CQRS.BuyItems.DTOs;
+using OnlineShop.Application.CQRS.BuyItems.Queries.GetBuyItemById;
 using OnlineShop.Application.CQRS.BuyItems.Queries.SearchBuyItems;
 using OnlineShop.Application.CQRS.BuyItems.Queries.SearchBuyItemsByUserId;
 
@@ -35,6 +36,13 @@ namespace OnlineShop.API.Controllers
         public async Task RemoveById([FromQuery] RemoveBuyItemByIdCommand command)
         {
             await _mediator.Send(command);
+        }
+
+        [HttpGet]
+        [Route("GetById")]
+        public async Task<GetBuyItemDTO> GetById([FromQuery] GetBuyItemByIdQuery query)
+        {
+            return await _mediator.Send(query);
         }
 
         [HttpGet]
