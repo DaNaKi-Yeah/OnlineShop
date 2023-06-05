@@ -34,7 +34,7 @@ namespace OnlineShop.Application.CQRS.Orders.Commands.CreateOrder
             var bankAccountId = request.BankAccountId;
 
 
-            var buyItems = new List<BuyItem>(); //
+            var buyItems = new List<BuyItem>();
 
             foreach (var buyItem in cartOut.BuyItems)
             {
