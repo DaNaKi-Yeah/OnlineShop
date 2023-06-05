@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Commands.CreateProductPropertyValuesInventory;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Commands.RemoveProductPropertyValuesInventoryById;
+using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Commands.UpdateProductPropertyValues;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.DTOs;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.GetProductPropertyValuesInventories;
 using OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.GetProductPropertyValuesInventoryById;
@@ -26,6 +27,13 @@ namespace OnlineShop.API.Controllers
         [HttpDelete]
         [Route("RemoveById")]
         public async Task RemoveById([FromQuery] RemoveProductPropertyValuesInventoryByIdCommand command)
+        {
+            await _mediator.Send(command);
+        }
+
+        [HttpPut]
+        [Route("Update")]
+        public async Task Update([FromBody] UpdateProductPropertyValuesCommand command)
         {
             await _mediator.Send(command);
         }

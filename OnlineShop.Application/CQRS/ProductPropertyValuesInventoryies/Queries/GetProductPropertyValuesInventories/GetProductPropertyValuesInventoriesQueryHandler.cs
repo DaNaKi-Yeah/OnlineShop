@@ -22,17 +22,23 @@ namespace OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.
 
         public async Task<List<GetProductPropertyValuesInventoryDTO>> Handle(GetProductPropertyValuesInventoriesQuery request, CancellationToken cancellationToken)
         {
-            if (request == null)
-            {
-                return _mapper.Map<List<GetProductPropertyValuesInventoryDTO>>(await _repository.GetAllAsync());
-            }
-
-            var items = (await _repository.GetQuery()
-                    .ToListAsync());
+            var items = await _repository.GetAllAsync();
 
             var baseResult = _mapper.Map<List<GetProductPropertyValuesInventoryDTO>>(items);
 
-            if (request.PageSize == null || request.PageNumber == null)
+            foreach (var item in items)
+            {
+                var dto = baseResult.First(x => x.Id == item.Id);
+
+                dto.ProductName = item.Product.ModelName;
+                dto.ProductCount = item.Count;
+            }
+
+            if (request == null)
+            {
+                return baseResult;
+            }
+            else if (request.PageSize == null || request.PageNumber == null)
             {
                 return baseResult;
             }

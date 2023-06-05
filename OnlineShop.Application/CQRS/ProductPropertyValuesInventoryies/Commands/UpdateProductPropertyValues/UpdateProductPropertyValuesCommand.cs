@@ -6,13 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop.Application.CQRS.BuyItems.Commands.CreateBuyItem
+namespace OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Commands.UpdateProductPropertyValues
 {
-    public class CreateBuyItemCommand : IRequest<int>
+    public class UpdateProductPropertyValuesCommand : IRequest
     {
         [Required]
-        public int UserId { get; set; }
-        [Required]
         public int InventoryId { get; set; }
+        public int Count { get; set; }
     }
 }

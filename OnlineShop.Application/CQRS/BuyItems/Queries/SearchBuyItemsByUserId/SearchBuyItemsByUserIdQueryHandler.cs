@@ -30,9 +30,9 @@ namespace OnlineShop.Application.CQRS.BuyItems.Queries.SearchBuyItemsByUserId
 
         public async Task<List<GetBuyItemDTO>> Handle(SearchBuyItemsByUserIdQuery request, CancellationToken cancellationToken)
         {
-            if (request is null)
+            if (request is null || request.UserId == 0)
             {
-                throw new ArgumentNullException("request is null");
+                throw new ArgumentNullException("request is null or UserId = 0");
             }
 
             var cartId = (await _userRepository.GetByIdAsync(request.UserId)).CartId;

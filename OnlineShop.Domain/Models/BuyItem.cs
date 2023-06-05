@@ -5,19 +5,7 @@ namespace OnlineShop.Domain.Models
 {
     public class BuyItem: BaseEntity<int>
     {
-        public int Count 
-        {
-            get { return Count; }
-            set
-            {
-                if (value > ProductPropertyValuesInventory.Count)
-                {
-                    throw new ArgumentOutOfRangeException($"Enter count 1-{ProductPropertyValuesInventory.Count}");
-                }
-                Count = value;
-            }
-        }
-
+        public int Count { get; set; }
 
 
         public int ProductPropertyValuesInventoryId { get; set; }

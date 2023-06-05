@@ -13,7 +13,7 @@ namespace OnlineShop.Application.CQRS.BuyItems.DTOs
     {
         public int Id { get; set; }
         public int CartId { get; set; }
-        public int ProductName { get; set; }
+        public string ProductName { get; set; }
         public int Count { get; set; }
         public int InventoryId { get; set; }
         public GetBuyItemProductPropertyValuesInventoryDTO InventoryDTO { get; set; }

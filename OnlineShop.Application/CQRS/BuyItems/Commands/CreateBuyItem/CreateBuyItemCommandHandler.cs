@@ -25,6 +25,11 @@ namespace OnlineShop.Application.CQRS.BuyItems.Commands.CreateBuyItem
 
         public async Task<int> Handle(CreateBuyItemCommand request, CancellationToken cancellationToken)
         {
+            if (request.UserId == 0 || request.InventoryId == 0)
+            {
+                throw new ArgumentException("UserId or Inventory id = 0");
+            }
+
             var cartId = (await _userRepository.GetByIdAsync(request.UserId)).CartId;
 
             var buyItem = new BuyItem()

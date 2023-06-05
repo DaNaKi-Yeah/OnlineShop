@@ -45,7 +45,7 @@ namespace OnlineShop.API.Controllers
         }
 
         [HttpGet]
-        [Route("GetCartByUserId")]
+        [Route("SearchCartsByUserId")]
         public async Task<GetCartDTO> SearchCartsByUserId([FromQuery] GetCartByUserIdQuery query)
         {
             return await _mediator.Send(query);
