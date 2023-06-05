@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop.Application.CQRS.Carts.Queries.GetCarts
+namespace OnlineShop.Application.CQRS.Carts.Queries.SearchCarts
 {
     public class GetCartsQueryHandler : CartHandler,IRequestHandler<GetCartsQuery, List<GetCartDTO>>
     {
@@ -18,11 +18,20 @@ namespace OnlineShop.Application.CQRS.Carts.Queries.GetCarts
 
         public async Task<List<GetCartDTO>> Handle(GetCartsQuery request, CancellationToken cancellationToken)
         {
-            var list = await _repository.GetAllAsync();
+            var getCarts = _mapper.Map<List<GetCartDTO>>(await _repository.GetAllAsync());
 
-            var result = _mapper.Map<List<GetCartDTO>>(list);
+            if (request == null)
+            {
+                return getCarts;
+            }
+            else if (request.PageSize == null || request.PageNumber == null)
+            {
+                return getCarts;
+            }
 
-            return result;
+            return getCarts
+                .Skip((request.PageNumber.Value - 1) * request.PageSize.Value)
+                .Take(request.PageSize.Value).ToList();
         }
     }
 }

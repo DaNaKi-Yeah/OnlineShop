@@ -5,14 +5,15 @@ using OnlineShop.Application.CQRS.Carts.Commands.CreateCart;
 using OnlineShop.Application.CQRS.Carts.Commands.RemoveCartById;
 using OnlineShop.Application.CQRS.Carts.Commands.UpdateCart;
 using OnlineShop.Application.CQRS.Carts.DTOs;
-using OnlineShop.Application.CQRS.Carts.Queries.GetCarts;
+using OnlineShop.Application.CQRS.Carts.Queries.SearchCarts;
+using OnlineShop.Application.CQRS.Carts.Queries.SearchCartsByUserId;
 
 namespace OnlineShop.API.Controllers
 {
     public class CartController : BaseController
     {
         public CartController(IMediator mediator, IMapper mapper) : base(mediator, mapper) { }
-
+        //unnecessary endpoints
         //[HttpPost]
         //[Route("Create")]
         //public async Task<int> Create([FromBody] CreateCartCommand command)
@@ -37,8 +38,15 @@ namespace OnlineShop.API.Controllers
         //}
 
         [HttpGet]
-        [Route("GetAll")]
+        [Route("GetAllWitPagination")]
         public async Task<List<GetCartDTO>> GetAll([FromQuery] GetCartsQuery query)
+        {
+            return await _mediator.Send(query);
+        }
+
+        [HttpGet]
+        [Route("GetCartByUserId")]
+        public async Task<GetCartDTO> SearchCartsByUserId([FromQuery] GetCartByUserIdQuery query)
         {
             return await _mediator.Send(query);
         }

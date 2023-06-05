@@ -16,14 +16,14 @@ namespace OnlineShop.API.Controllers
     {
         public OrderController(IMediator mediator, IMapper mapper) : base(mediator, mapper) { }
 
-        [HttpPost]
-        [Route("Create")]
-        public async Task<int> Create([FromBody] CreateOrderCommand command)
-        {
-            var id = await _mediator.Send(command);
+        //[HttpPost]
+        //[Route("Create")]
+        //public async Task<int> Create([FromBody] CreateOrderCommand command)
+        //{
+        //    var id = await _mediator.Send(command);
 
-            return id;
-        }
+        //    return id;
+        //}
 
         [HttpDelete]
         [Route("RemoveById")]
@@ -41,7 +41,7 @@ namespace OnlineShop.API.Controllers
 
         [HttpGet]
         [Route("SearchByUserId")]
-        public async Task<List<SearchOrderDTO>> Search([FromQuery] SearchOrdersByUserIdQuery query)
+        public async Task<List<GetOrderDTO>> Search([FromQuery] SearchOrdersByUserIdQuery query)
         {
             return await _mediator.Send(query);
         }
