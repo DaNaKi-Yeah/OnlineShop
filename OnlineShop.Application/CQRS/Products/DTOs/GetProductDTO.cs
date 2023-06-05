@@ -16,6 +16,8 @@ namespace OnlineShop.Application.CQRS.Products.DTOs
         public string PictureLink { get; set; }
         public decimal Price { get; set; }
         public string AverageRating { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
 
         public List<GetProductPropertyValuesInventoryVM> ProductPropertyValuesInventories { get; set; }
 
@@ -27,6 +29,9 @@ namespace OnlineShop.Application.CQRS.Products.DTOs
                 .ForMember(x => x.Description, opt => opt.MapFrom(y => y.Description))
                 .ForMember(x => x.PictureLink, opt => opt.MapFrom(y => y.PictureLink))
                 .ForMember(x => x.Price, opt => opt.MapFrom(y => y.Price))
+                .ForMember(x => x.Price, opt => opt.MapFrom(y => y.Price))
+                .ForMember(x => x.CategoryId, opt => opt.MapFrom(y => y.CategoryId))
+                .ForMember(x => x.CategoryName, opt => opt.MapFrom(y => y.Category.Name))
                 .ForMember(x => x.AverageRating, opt => opt.MapFrom(
                     y => y.Reviews.Count != 0
                         ? Math.Round((double)(y.Reviews.Select(r => r.Rating).Sum()) / (double)y.Reviews.Count, 1).ToString()

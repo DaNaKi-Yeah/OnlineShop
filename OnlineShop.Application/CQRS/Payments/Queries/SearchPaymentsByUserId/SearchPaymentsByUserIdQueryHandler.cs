@@ -10,21 +10,21 @@ using OnlineShop.Application.CQRS.Payments.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
 
-namespace OnlineShop.Application.CQRS.Payments.Queries.SearchPayments
+namespace OnlineShop.Application.CQRS.Payments.Queries.SearchPaymentsByUserId
 {
-    public class SearchPaymentsQueryHandler : PaymentHandler, IRequestHandler<SearchPaymentsQuery, List<GetPaymentDTO>>
+    public class SearchPaymentsByUserIdQueryHandler : PaymentHandler, IRequestHandler<SearchPaymentsByUserIdQuery, List<GetPaymentDTO>>
     {
-        public SearchPaymentsQueryHandler(IRepository<Payment, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public SearchPaymentsByUserIdQueryHandler(IRepository<Payment, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<List<GetPaymentDTO>> Handle(SearchPaymentsQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetPaymentDTO>> Handle(SearchPaymentsByUserIdQuery request, CancellationToken cancellationToken)
         {
-            if (request == null || request.ClientId == 0)
+            if (request == null || request.UserId == 0)
             {
                 return _mapper.Map<List<GetPaymentDTO>>(await _repository.GetAllAsync());
             }
 
 
-            var baseResult = _mapper.Map<List<GetPaymentDTO>>(await _repository.GetQuery().Where(x => x.Order.Cart.UserId == request.ClientId)
+            var baseResult = _mapper.Map<List<GetPaymentDTO>>(await _repository.GetQuery().Where(x => x.Order.Cart.UserId == request.UserId)
                 .ToListAsync());
 
             if (request.PageSize == null || request.PageNumber == null)

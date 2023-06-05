@@ -8,7 +8,7 @@ using OnlineShop.Application.CQRS.Payments.Commands.CreatePayment;
 using OnlineShop.Application.CQRS.Payments.Commands.RemoveByIdPayment;
 using OnlineShop.Application.CQRS.Payments.DTOs;
 using OnlineShop.Application.CQRS.Payments.Queries.GetPaymentById;
-using OnlineShop.Application.CQRS.Payments.Queries.SearchPayments;
+using OnlineShop.Application.CQRS.Payments.Queries.SearchPaymentsByUserId;
 
 namespace OnlineShop.API.Controllers
 {
@@ -16,18 +16,18 @@ namespace OnlineShop.API.Controllers
     {
         public PaymentController(IMediator mediator, IMapper mapper) : base(mediator, mapper) { }
 
-        [HttpPost]
-        [Route("Create")]
-        public async Task<int> Create([FromBody] CreatePaymentCommand command)
-        {
-            var id = await _mediator.Send(command);
+        //[HttpPost]
+        //[Route("Create")]
+        //public async Task<int> Create([FromBody] CreatePaymentCommand command)
+        //{
+        //    var id = await _mediator.Send(command);
 
-            return id;
-        }
+        //    return id;
+        //}
 
         [HttpDelete]
-        [Route("Remove")]
-        public async Task Remove([FromQuery] RemoveByIdPaymentCommand command)
+        [Route("RemoveById")]
+        public async Task RemoveById([FromQuery] RemoveByIdPaymentCommand command)
         {
             await _mediator.Send(command);
         }
@@ -40,8 +40,8 @@ namespace OnlineShop.API.Controllers
         }
 
         [HttpGet]
-        [Route("Search")]
-        public async Task<List<GetPaymentDTO>> Search([FromQuery] SearchPaymentsQuery query)
+        [Route("SearchByUserId")]
+        public async Task<List<GetPaymentDTO>> Search([FromQuery] SearchPaymentsByUserIdQuery query)
         {
             return await _mediator.Send(query);
         }

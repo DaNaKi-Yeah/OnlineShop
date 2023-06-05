@@ -12,16 +12,16 @@ namespace OnlineShop.Domain.Models
 
                 foreach (var item in BuyItems)
                 {
-                    sum += item.Product.Price * item.Count;
+                    sum += item.ProductPropertyValuesInventory.Product.Price * item.Count;
                 }
 
                 return sum;
             }
         }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public virtual User User { get; set; }
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }
         public virtual Order Order { get; set; }
         public virtual List<BuyItem> BuyItems { get; set; }
     }

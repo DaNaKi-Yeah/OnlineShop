@@ -15,7 +15,7 @@ namespace OnlineShop.API.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public async Task<GetCategoryPropertyDTO> Create([FromBody] CreateCategoryPropertyCommand command)
+        public async Task<int> Create([FromBody] CreateCategoryPropertyCommand command)
         {
             var result = await _mediator.Send(command);
 
@@ -24,7 +24,7 @@ namespace OnlineShop.API.Controllers
 
         [HttpDelete]
         [Route("RemoveById")]
-        public async Task Remove([FromQuery] RemoveByIdCategoryPropertyCommand command)
+        public async Task RemoveById([FromQuery] RemoveByIdCategoryPropertyCommand command)
         {
             await _mediator.Send(command);
         }

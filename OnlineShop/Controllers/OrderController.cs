@@ -4,12 +4,11 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-using OnlineShop.Application.CQRS.Categories.Queries.GetCategories;
 using OnlineShop.Application.CQRS.Orders.Commands.CreateOrder;
 using OnlineShop.Application.CQRS.Orders.Commands.RemoveByIdOrder;
 using OnlineShop.Application.CQRS.Orders.DTOs;
 using OnlineShop.Application.CQRS.Orders.Queries.GetOrderById;
-using OnlineShop.Application.CQRS.Orders.Queries.GetOrders;
+using OnlineShop.Application.CQRS.Orders.Queries.SearchOrdersByUserId;
 
 namespace OnlineShop.API.Controllers
 {
@@ -27,8 +26,8 @@ namespace OnlineShop.API.Controllers
         }
 
         [HttpDelete]
-        [Route("Remove")]
-        public async Task Remove([FromQuery] RemoveByIdOrderCommand command)
+        [Route("RemoveById")]
+        public async Task RemoveById([FromQuery] RemoveByIdOrderCommand command)
         {
             await _mediator.Send(command);
         }
@@ -41,8 +40,8 @@ namespace OnlineShop.API.Controllers
         }
 
         [HttpGet]
-        [Route("Search")]
-        public async Task<List<GetOrderDTO>> Search([FromQuery] SearchOrdersQuery query)
+        [Route("SearchByUserId")]
+        public async Task<List<SearchOrderDTO>> Search([FromQuery] SearchOrdersByUserIdQuery query)
         {
             return await _mediator.Send(query);
         }

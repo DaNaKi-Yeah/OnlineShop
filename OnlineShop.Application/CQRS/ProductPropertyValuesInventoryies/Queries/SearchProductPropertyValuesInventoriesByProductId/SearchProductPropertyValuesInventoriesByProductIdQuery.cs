@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.SearchProductPropertyValuesInventories
+namespace OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.SearchProductPropertyValuesInventoriesByProductId
 {
-    public class SearchProductPropertyValuesInventoriesQuery : IRequest<List<GetProductPropertyValuesInventoryDTO>>
+    public class SearchProductPropertyValuesInventoriesByProductIdQuery : IRequest<List<GetProductPropertyValuesInventoryDTO>>
     {
         [Required]
         public int ProductId { get; set; }

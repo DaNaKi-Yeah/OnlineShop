@@ -12,15 +12,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.SearchProductPropertyValuesInventories
+namespace OnlineShop.Application.CQRS.ProductPropertyValuesInventoryies.Queries.SearchProductPropertyValuesInventoriesByProductId
 {
-    public class SearchProductPropertyValuesInventoriesQueryHandler : 
+    public class SearchProductPropertyValuesInventoriesByProductIdQueryHandler : 
         ProductPropertyValuesInventoryHandler, 
-        IRequestHandler<SearchProductPropertyValuesInventoriesQuery, List<GetProductPropertyValuesInventoryDTO>>
+        IRequestHandler<SearchProductPropertyValuesInventoriesByProductIdQuery, List<GetProductPropertyValuesInventoryDTO>>
     {
-        public SearchProductPropertyValuesInventoriesQueryHandler(IRepository<ProductPropertyValuesInventory, int> repository, IMapper mapper) : base(repository, mapper) { }
+        public SearchProductPropertyValuesInventoriesByProductIdQueryHandler(IRepository<ProductPropertyValuesInventory, int> repository, IMapper mapper) : base(repository, mapper) { }
 
-        public async Task<List<GetProductPropertyValuesInventoryDTO>> Handle(SearchProductPropertyValuesInventoriesQuery request, CancellationToken cancellationToken)
+        public async Task<List<GetProductPropertyValuesInventoryDTO>> Handle(SearchProductPropertyValuesInventoriesByProductIdQuery request, CancellationToken cancellationToken)
         {
             if (request == null)
             {

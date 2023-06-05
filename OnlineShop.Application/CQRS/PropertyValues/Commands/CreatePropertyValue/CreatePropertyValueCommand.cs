@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace OnlineShop.Application.CQRS.PropertyValues.Commands.CreatePropertyValue
 {
-    public class CreatePropertyValueCommand : IRequest<GetPropertyValueDTO>, IMapWith<PropertyValue>
+    public class CreatePropertyValueCommand : IRequest<int>, IMapWith<PropertyValue>
     {
         [Required]
         public int PropertyId { get; set; }

@@ -9,12 +9,6 @@ namespace OnlineShop.Persistence.EntityTypeConfigurations
         public void Configure(EntityTypeBuilder<Payment> builder)
         {
             builder
-                .HasOne(p => p.BankAccount)
-                .WithMany(ba => ba.Payments)
-                .HasForeignKey(p => p.BankAccountId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder
                 .HasOne(p => p.Order)
                 .WithOne(o => o.Payment)
                 .HasForeignKey<Payment>(p => p.OrderId)

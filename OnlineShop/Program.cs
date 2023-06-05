@@ -1,24 +1,10 @@
-using Microsoft.Extensions.DependencyInjection;
-
 using OnlineShop.Application;
 using OnlineShop.Application.Common.Mappings;
 using OnlineShop.Application.Interfaces;
-using OnlineShop.Domain.Models;
 using OnlineShop.Persistence;
 using OnlineShop.Persistence.Db.SqlServer;
 using IdentityServer4.AccessTokenValidation;
 using System.Reflection;
-using OnlineShop.API.JWT;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using IdentityServer4.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.OpenApi.Models;
-using OnlineShop.API.JWT;
-using ITokenService = OnlineShop.API.JWT.ITokenService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,7 +17,6 @@ builder.Services.AddAutoMapper(config =>
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
-
 
 builder.Services.AddCors(options =>
 {
