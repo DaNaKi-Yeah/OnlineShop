@@ -13,7 +13,9 @@ namespace OnlineShop.Application.CQRS.BuyItems.DTOs
     {
         public int Id { get; set; }
         public int CartId { get; set; }
+        public int ProductId { get; set; }
         public string ProductName { get; set; }
+        public decimal ProductPrice { get; set; }
         public int Count { get; set; }
         public int InventoryId { get; set; }
         public GetBuyItemProductPropertyValuesInventoryDTO InventoryDTO { get; set; }
@@ -23,7 +25,9 @@ namespace OnlineShop.Application.CQRS.BuyItems.DTOs
             profile.CreateMap<BuyItem, GetBuyItemDTO>()
                 .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
                 .ForMember(x => x.CartId, opt => opt.MapFrom(y => y.CartId))
+                .ForMember(x => x.ProductId, opt => opt.MapFrom(y => y.ProductPropertyValuesInventory.ProductId))
                 .ForMember(x => x.ProductName, opt => opt.MapFrom(y => y.ProductPropertyValuesInventory.Product.ModelName))
+                .ForMember(x => x.ProductPrice, opt => opt.MapFrom(y => y.ProductPropertyValuesInventory.Product.Price))
                 .ForMember(x => x.Count, opt => opt.MapFrom(y => y.Count))
                 .ForMember(x => x.InventoryId, opt => opt.MapFrom(y => y.ProductPropertyValuesInventoryId));
         }
