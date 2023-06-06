@@ -15,15 +15,15 @@ namespace OnlineShop.API.JWT;
 
 public static class JwtBearerExtensions
 {
-    public static List<Claim> CreateClaims(this User user, List<IdentityRole<int>> roles)
+    public static List<Claim> CreateClaims(this UserAccount userAccount, List<IdentityRole<int>> roles)
     {
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             new(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)),
-            new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Name, user.UserName!),
-            new(ClaimTypes.Email, user.Email!),
+            new(ClaimTypes.NameIdentifier, userAccount.Id.ToString()),
+            new(ClaimTypes.Name, userAccount.UserName!),
+            new(ClaimTypes.Email, userAccount.Email!),
             new(ClaimTypes.Role, string.Join(" ", roles.Select(x => x.Name))),
         };
         return claims;

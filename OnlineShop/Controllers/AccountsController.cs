@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 
 using IdentityServer4.Services;
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,21 +17,22 @@ using ITokenService = OnlineShop.API.JWT.ITokenService;
 
 namespace OnlineShop.API.Controllers
 {
-    [ApiController]
+    [ApiController]    
     [Route("accounts")]
-    public class AccountsController : ControllerBase
+    public class AccountsController : Controller
     {
-        private readonly UserManager<User> _userManager;
+        private readonly UserManager<UserAccount> _userManager;
         private readonly SQLServerOnlineShopDbContext _context;
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
 
-        public AccountsController(ITokenService tokenService, SQLServerOnlineShopDbContext context, UserManager<User> userManager, IConfiguration configuration)
+        public AccountsController(ITokenService tokenService, SQLServerOnlineShopDbContext context, UserManager<UserAccount> userManager, IConfiguration configuration)
         {
             _tokenService = tokenService;
             _context = context;
             _userManager = userManager;
             _configuration = configuration;
+            
         }
 
         [HttpPost("login")]
@@ -55,53 +57,68 @@ namespace OnlineShop.API.Controllers
                 return BadRequest("Bad credentials");
             }
 
-            var user = _context.Users.FirstOrDefault(u => u.Email == request.Email);
+            var userAccount = _context.UserAccounts.FirstOrDefault(u => u.Email == request.Email);
 
-            if (user is null)
+            if (userAccount is null)
                 return Unauthorized();
 
-            var roleIds = await _context.UserRoles.Where(r => r.UserId == user.Id).Select(x => x.RoleId).ToListAsync();
+            var roleIds = await _context.UserRoles.Where(r => r.UserId == userAccount.Id).Select(x => x.RoleId).ToListAsync();
             var roles = _context.Roles.Where(x => roleIds.Contains(x.Id)).ToList();
 
-            var accessToken = _tokenService.CreateToken(user, roles);
-            user.RefreshToken = _configuration.GenerateRefreshToken();
-            user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_configuration.GetSection("Jwt:RefreshTokenValidityInDays").Get<int>());
+            var accessToken = _tokenService.CreateToken(userAccount, roles);
+            userAccount.RefreshToken = _configuration.GenerateRefreshToken();
+            userAccount.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_configuration.GetSection("Jwt:RefreshTokenValidityInDays").Get<int>());
 
             await _context.SaveChangesAsync();
 
             return Ok(new AuthResponse
             {
-                Username = user.UserName!,
-                Email = user.Email!,
+                Username = userAccount.UserName!,
+                Email = userAccount.Email!,
                 Token = accessToken,
-                RefreshToken = user.RefreshToken
+                RefreshToken = userAccount.RefreshToken
             });
         }
 
-        [HttpPost("register")]
-        public async Task<ActionResult<AuthResponse>> Register([FromBody] RegisterRequest request)
+        [HttpPost("register/admin")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
+        public async Task<ActionResult<AuthResponse>> RegisterAdmin([FromBody] RegisterRequest request)
+        {
+            return await RegisterNewUser(request, "admin");
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register/client")]
+        public async Task<ActionResult<AuthResponse>> RegisterClient([FromBody] RegisterRequest request)
+        {
+            return await RegisterNewUser(request, "client");
+        }
+
+        private async Task<ActionResult<AuthResponse>> RegisterNewUser(RegisterRequest request, string roleName)
         {
             if (!ModelState.IsValid) return BadRequest(request);
 
-            var user = new User
+            var userAccount = new UserAccount
             {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
                 Email = request.Email,
                 UserName = request.Email
             };
-            var result = await _userManager.CreateAsync(user, request.Password);
+            var result = await _userManager.CreateAsync(userAccount, request.Password);
 
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);
             }
 
-            if (!result.Succeeded) return BadRequest(request);
+            if (!result.Succeeded) return BadRequest(ModelState);
 
-            var findUser = await _context.Users.FirstOrDefaultAsync(x => x.Email == request.Email);
+            var findUser = await _context.UserAccounts.FirstOrDefaultAsync(x => x.Email == request.Email);
 
             if (findUser == null) throw new Exception($"User {request.Email} not found");
 
-            await _userManager.AddToRoleAsync(findUser, RoleConsts.Member);
+            await _userManager.AddToRoleAsync(findUser, roleName);
 
             return await Authenticate(new AuthRequest
             {
@@ -129,9 +146,9 @@ namespace OnlineShop.API.Controllers
             }
 
             var username = principal.Identity!.Name;
-            var user = await _userManager.FindByNameAsync(username!);
+            var userAccount = await _userManager.FindByNameAsync(username!);
 
-            if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.UtcNow)
+            if (userAccount == null || userAccount.RefreshToken != refreshToken || userAccount.RefreshTokenExpiryTime <= DateTime.UtcNow)
             {
                 return BadRequest("Invalid access token or refresh token");
             }
@@ -139,8 +156,8 @@ namespace OnlineShop.API.Controllers
             var newAccessToken = _configuration.CreateToken(principal.Claims.ToList());
             var newRefreshToken = _configuration.GenerateRefreshToken();
 
-            user.RefreshToken = newRefreshToken;
-            await _userManager.UpdateAsync(user);
+            userAccount.RefreshToken = newRefreshToken;
+            await _userManager.UpdateAsync(userAccount);
 
             return new ObjectResult(new
             {
@@ -154,11 +171,11 @@ namespace OnlineShop.API.Controllers
         [Route("revoke/{username}")]
         public async Task<IActionResult> Revoke(string username)
         {
-            var user = await _userManager.FindByNameAsync(username);
-            if (user == null) return BadRequest("Invalid user name");
+            var userAccount = await _userManager.FindByNameAsync(username);
+            if (userAccount == null) return BadRequest("Invalid user name");
 
-            user.RefreshToken = null;
-            await _userManager.UpdateAsync(user);
+            userAccount.RefreshToken = null;
+            await _userManager.UpdateAsync(userAccount);
 
             return Ok();
         }
@@ -169,10 +186,10 @@ namespace OnlineShop.API.Controllers
         public async Task<IActionResult> RevokeAll()
         {
             var users = _userManager.Users.ToList();
-            foreach (var user in users)
+            foreach (var userAccount in users)
             {
-                user.RefreshToken = null;
-                await _userManager.UpdateAsync(user);
+                userAccount.RefreshToken = null;
+                await _userManager.UpdateAsync(userAccount);
             }
 
             return Ok();

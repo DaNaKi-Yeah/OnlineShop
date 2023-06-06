@@ -3,8 +3,20 @@ using OnlineShop.Application.Common.Mappings;
 using OnlineShop.Application.Interfaces;
 using OnlineShop.Persistence;
 using OnlineShop.Persistence.Db.SqlServer;
-using IdentityServer4.AccessTokenValidation;
 using System.Reflection;
+using OnlineShop.API.JWT;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using OnlineShop.Domain.Models;
+using Microsoft.AspNetCore.Hosting;
+using OnlineShop.API.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +29,6 @@ builder.Services.AddAutoMapper(config =>
 
 builder.Services.AddApplication();
 builder.Services.AddPersistence(builder.Configuration);
-
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -27,7 +38,9 @@ builder.Services.AddCors(options =>
         policy.AllowAnyOrigin();
     });
 });
+
 builder.Services.AddScoped<ITokenService, TokenService>();
+
 builder.Services.AddAuthentication(opt => {
     opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -45,18 +58,34 @@ builder.Services.AddAuthentication(opt => {
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"]!))
         };
     });
-builder.Services.AddAuthorization(options => options.DefaultPolicy =
-    new AuthorizationPolicyBuilder
-            (JwtBearerDefaults.AuthenticationScheme)
-        .RequireAuthenticatedUser()
-        .Build());
-builder.Services.AddIdentity<User, IdentityRole<int>>()
+
+builder.Services.AddIdentity<UserAccount, IdentityRole<int>>()    
     .AddEntityFrameworkStores<SQLServerOnlineShopDbContext>()
-    .AddUserManager<UserManager<User>>()
-    .AddSignInManager<SignInManager<User>>();
+    .AddUserManager<UserManager<UserAccount>>()
+    //.AddRoleManager<RoleManager<IdentityRole<int>>>()
+    .AddSignInManager<SignInManager<UserAccount>>();
+
+builder.Services.AddScoped(typeof(RoleManager<IdentityRole<int>>));
+
+try
+{
+    var userManager = builder.Services.BuildServiceProvider().GetRequiredService<UserManager<UserAccount>>();
+    var rolesManager = builder.Services.BuildServiceProvider()
+        .GetRequiredService<RoleManager<IdentityRole<int>>>();
+    await RoleInitializer.InitializeAsync(userManager, rolesManager);
+}
+catch (Exception ex)
+{
+    var logger = builder.Services.BuildServiceProvider().GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred while seeding the database.");
+}
+
+
+builder.Services.BuildServiceProvider().GetRequiredService<UserManager<UserAccount>>(); 
+
 builder.Services.AddSwaggerGen(option =>
 {
-    option.SwaggerDoc("v1", new OpenApiInfo { Title = "Pathnostics", Version = "v1" });
+    option.SwaggerDoc("v1", new OpenApiInfo { Title = "OnlineShop", Version = "v1" });
     option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
@@ -85,16 +114,14 @@ builder.Services.AddSwaggerGen(option =>
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
 // Configure the HTTP request pipeline.
 
 app.UseSwagger();
-app.UseSwaggerUI(c => 
+app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "OnlineShop");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "OnlineShop");
 });
 
 

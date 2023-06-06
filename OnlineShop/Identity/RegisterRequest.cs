@@ -5,32 +5,19 @@ namespace OnlineShop.API.Identity;
 public class RegisterRequest
 {
     [Required]
-    [Display(Name = "Email")]
-    public string Email { get; set; } = null!;
+    public string Email { get; set; } 
 
     [Required]
-    [Display(Name = "Дата рождения")]
-    public DateTime BirthDate { get; set; }
+    public string Password { get; set; } 
 
     [Required]
-    [DataType(DataType.Password)]
-    [Display(Name = "Пароль")]
-    public string Password { get; set; } = null!;
+    public string PasswordConfirm { get; set; } 
 
     [Required]
-    [Compare("Password", ErrorMessage = "Пароли не совпадают")]
-    [DataType(DataType.Password)]
-    [Display(Name = "Подтвердить пароль")]
-    public string PasswordConfirm { get; set; } = null!;
+    public string FirstName { get; set; } 
 
     [Required]
-    [Display(Name = "Имя")]
-    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; }
 
-    [Required]
-    [Display(Name = "Фамилия")]
-    public string LastName { get; set; } = null!;
-
-    [Display(Name = "Отчество")]
-    public string? MiddleName { get; set; }
+    
 }

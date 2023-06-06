@@ -15,14 +15,15 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace OnlineShop.Persistence.Db.SqlServer
 {
-    public class SQLServerOnlineShopDbContext : IdentityDbContext<User, IdentityRole<int>, int>, IOnlineShopDbContext
+    public class SQLServerOnlineShopDbContext : IdentityDbContext<UserAccount, IdentityRole<int>, int>, IOnlineShopDbContext
     {
         public SQLServerOnlineShopDbContext(DbContextOptions<SQLServerOnlineShopDbContext> options)
         : base(options)
         {
-            //Database.Migrate();
+            
         }
         public DbSet<BuyItem> BuyItems { get; set; }
         public DbSet<CategoryProperty> CategoryProperties { get; set; }
@@ -38,10 +39,8 @@ namespace OnlineShop.Persistence.Db.SqlServer
         public DbSet<Value> Values { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
-        public DbSet<User> Users { get; set; }
-
-        public SQLServerOnlineShopDbContext(DbContextOptions options) : base(options) { }
-
+        public DbSet<UserAccount> UserAccounts { get; set; }
+        
         private bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
         {
             while (toCheck != null && toCheck != typeof(object))

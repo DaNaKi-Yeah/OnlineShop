@@ -6,5 +6,5 @@ namespace OnlineShop.API.JWT;
 
 public interface ITokenService
 {
-    string CreateToken(User user, List<IdentityRole<int>> role);
+    string CreateToken(UserAccount userAccount, List<IdentityRole<int>> role);
 }

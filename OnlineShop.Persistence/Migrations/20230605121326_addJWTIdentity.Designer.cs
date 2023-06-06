@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Persistence.Db.SqlServer;
 
@@ -11,9 +12,11 @@ using OnlineShop.Persistence.Db.SqlServer;
 namespace OnlineShop.Persistence.Migrations
 {
     [DbContext(typeof(SQLServerOnlineShopDbContext))]
-    partial class SQLServerOnlineShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230605121326_addJWTIdentity")]
+    partial class addJWTIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -515,6 +518,9 @@ namespace OnlineShop.Persistence.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
