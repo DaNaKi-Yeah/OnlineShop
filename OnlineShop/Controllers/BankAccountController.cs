@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Application.CQRS.BankAccounts.Commands.CreateBankAccount;
 using OnlineShop.Application.CQRS.BankAccounts.Commands.RemoveBankAccountById;
+using OnlineShop.Application.CQRS.BankAccounts.Commands.UpdateBankAccount;
 using OnlineShop.Application.CQRS.BankAccounts.DTOs;
 using OnlineShop.Application.CQRS.BankAccounts.Queries.GetBankAccountById;
 using OnlineShop.Application.CQRS.BankAccounts.Queries.SearchBankAccountsByUserId;
@@ -13,6 +14,7 @@ using OnlineShop.Application.CQRS.BuyItems.DTOs;
 using OnlineShop.Application.CQRS.BuyItems.Queries.GetBuyItemById;
 using OnlineShop.Application.CQRS.BuyItems.Queries.SearchBuyItems;
 using OnlineShop.Application.CQRS.BuyItems.Queries.SearchBuyItemsByUserId;
+using OnlineShop.Application.CQRS.Users.Commands.UpdateUser;
 
 namespace OnlineShop.API.Controllers
 {
@@ -27,6 +29,13 @@ namespace OnlineShop.API.Controllers
             var id = await _mediator.Send(command);
 
             return id;
+        }
+
+        [HttpPut]
+        [Route("Update")]
+        public async Task Update([FromBody] UpdateBankAccountCommand command)
+        {
+            await _mediator.Send(command);
         }
 
         [HttpDelete]
