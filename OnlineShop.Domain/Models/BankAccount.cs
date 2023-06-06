@@ -13,7 +13,7 @@ namespace OnlineShop.Domain.Models
         public decimal Sum { get; set; }
         public string CardDataHash { get; set; }
 
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public virtual User User { get; set; }
         public virtual List<Payment> Payments { get; set; }
     }
