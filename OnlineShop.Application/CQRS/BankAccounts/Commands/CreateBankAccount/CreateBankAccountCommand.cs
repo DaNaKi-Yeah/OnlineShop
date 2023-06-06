@@ -10,8 +10,7 @@ namespace OnlineShop.Application.CQRS.BankAccounts.Commands.CreateBankAccount
 {
     public class CreateBankAccountCommand : IRequest<int>
     {
-        [Required]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         public string CardNumber { get; set; }
         public string FirstName { get; set; }
