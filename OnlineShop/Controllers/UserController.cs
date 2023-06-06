@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShop.Application.CQRS.Users.Commands.CreateUser;
+using OnlineShop.Application.CQRS.Users.Commands.UpdateUser;
 using OnlineShop.Application.CQRS.Users.DTOs;
 using OnlineShop.Application.CQRS.Users.Queries.GetUsers;
 
@@ -18,6 +19,12 @@ namespace OnlineShop.API.Controllers
             return await _mediator.Send(command);
         }
 
+        [HttpPut]
+        [Route("Update")]
+        public async Task Update([FromBody] UpdateUserCommand command)
+        {
+            await _mediator.Send(command);
+        }
 
         [HttpGet]
         [Route("GetAll")]
