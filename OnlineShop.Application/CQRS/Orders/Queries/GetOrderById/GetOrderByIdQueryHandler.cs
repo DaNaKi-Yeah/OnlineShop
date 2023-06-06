@@ -11,13 +11,23 @@ namespace OnlineShop.Application.CQRS.Orders.Queries.GetOrderById
 {
     public class GetOrderByIdQueryHandler : OrderHandler, IRequestHandler<GetOrderByIdQuery, GetOrderDTO>
     {
-        public GetOrderByIdQueryHandler(IRepository<Order, int> repository, IMapper mapper) : base(repository, mapper) { }
+        private readonly IRepository<User, int> _userRepository;
+
+        public GetOrderByIdQueryHandler(IRepository<Order, int> repository, IRepository<User, int> userRepository, IMapper mapper)
+            : base(repository, mapper)
+        {
+            _userRepository = userRepository;
+        }
 
         public async Task<GetOrderDTO> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
         {
             Order order = await _repository.GetByIdAsync(request.Id);
 
-            return _mapper.Map<GetOrderDTO>(order);
+            var getOrder = _mapper.Map<GetOrderDTO>(order);
+
+            getOrder.UserName = (await _userRepository.GetByIdAsync((int)order.Cart.UserId)).UserName;
+
+            return getOrder;
         }
     }
 }

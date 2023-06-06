@@ -11,13 +11,23 @@ namespace OnlineShop.Application.CQRS.Payments.Queries.GetPaymentById
 {
     public class GetPaymentByIdQueryHandler : PaymentHandler, IRequestHandler<GetPaymentByIdQuery, GetPaymentDTO>
     {
-        public GetPaymentByIdQueryHandler(IRepository<Payment, int> repository, IMapper mapper) : base(repository, mapper) { }
+        private readonly IRepository<User, int> _userRepository;
+
+        public GetPaymentByIdQueryHandler(IRepository<Payment, int> repository, IRepository<User, int> userRepository, IMapper mapper)
+            : base(repository, mapper)
+        {
+            _userRepository = userRepository;
+        }
 
         public async Task<GetPaymentDTO> Handle(GetPaymentByIdQuery request, CancellationToken cancellationToken)
         {
-            Payment payment = await _repository.GetByIdAsync(request.Id);
+            var payment = await _repository.GetByIdAsync(request.Id);
 
-            return _mapper.Map<GetPaymentDTO>(payment);
+            var result = _mapper.Map<GetPaymentDTO>(payment);
+
+            result.UserName = (await _userRepository.GetByIdAsync((int)payment.Order.Cart.UserId)).UserName;
+
+            return result;
         }
     }
 }
