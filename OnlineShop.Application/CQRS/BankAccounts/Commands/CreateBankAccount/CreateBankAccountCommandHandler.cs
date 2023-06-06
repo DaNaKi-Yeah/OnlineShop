@@ -20,6 +20,7 @@ namespace OnlineShop.Application.CQRS.BankAccounts.Commands.CreateBankAccount
         {
             var bankAccount = new BankAccount()
             {
+                UserId = request.UserId,
                 CardNumber = request.CardNumber,
                 CardDataHash = Hasher.HashString($"{request.CardNumber} {request.FirstName} {request.SecondName}"),
                 Sum = request.Sum
