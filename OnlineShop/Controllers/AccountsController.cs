@@ -135,73 +135,73 @@ namespace OnlineShop.API.Controllers
                 Password = request.Password
             });
         }
+        //idk
+        //[HttpPost]
+        //[Route("refresh-token")]
+        //public async Task<IActionResult> RefreshToken(TokenModel? tokenModel)
+        //{
+        //    if (tokenModel is null)
+        //    {
+        //        return BadRequest("Invalid client request");
+        //    }
 
-        [HttpPost]
-        [Route("refresh-token")]
-        public async Task<IActionResult> RefreshToken(TokenModel? tokenModel)
-        {
-            if (tokenModel is null)
-            {
-                return BadRequest("Invalid client request");
-            }
+        //    var accessToken = tokenModel.AccessToken;
+        //    var refreshToken = tokenModel.RefreshToken;
+        //    var principal = _configuration.GetPrincipalFromExpiredToken(accessToken);
 
-            var accessToken = tokenModel.AccessToken;
-            var refreshToken = tokenModel.RefreshToken;
-            var principal = _configuration.GetPrincipalFromExpiredToken(accessToken);
+        //    if (principal == null)
+        //    {
+        //        return BadRequest("Invalid access token or refresh token");
+        //    }
 
-            if (principal == null)
-            {
-                return BadRequest("Invalid access token or refresh token");
-            }
+        //    var username = principal.Identity!.Name;
+        //    var userAccount = await _userManager.FindByNameAsync(username!);
 
-            var username = principal.Identity!.Name;
-            var userAccount = await _userManager.FindByNameAsync(username!);
+        //    if (userAccount == null || userAccount.RefreshToken != refreshToken || userAccount.RefreshTokenExpiryTime <= DateTime.UtcNow)
+        //    {
+        //        return BadRequest("Invalid access token or refresh token");
+        //    }
 
-            if (userAccount == null || userAccount.RefreshToken != refreshToken || userAccount.RefreshTokenExpiryTime <= DateTime.UtcNow)
-            {
-                return BadRequest("Invalid access token or refresh token");
-            }
+        //    var newAccessToken = _configuration.CreateToken(principal.Claims.ToList());
+        //    var newRefreshToken = _configuration.GenerateRefreshToken();
 
-            var newAccessToken = _configuration.CreateToken(principal.Claims.ToList());
-            var newRefreshToken = _configuration.GenerateRefreshToken();
+        //    userAccount.RefreshToken = newRefreshToken;
+        //    await _userManager.UpdateAsync(userAccount);
 
-            userAccount.RefreshToken = newRefreshToken;
-            await _userManager.UpdateAsync(userAccount);
+        //    return new ObjectResult(new
+        //    {
+        //        accessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
+        //        refreshToken = newRefreshToken
+        //    });
+        //}
 
-            return new ObjectResult(new
-            {
-                accessToken = new JwtSecurityTokenHandler().WriteToken(newAccessToken),
-                refreshToken = newRefreshToken
-            });
-        }
+        //[Authorize]
+        //[HttpPost]
+        //[Route("revoke/{username}")]
+        //public async Task<IActionResult> Revoke(string username)
+        //{
+        //    var userAccount = await _userManager.FindByNameAsync(username);
+        //    if (userAccount == null) return BadRequest("Invalid user name");
 
-        [Authorize]
-        [HttpPost]
-        [Route("revoke/{username}")]
-        public async Task<IActionResult> Revoke(string username)
-        {
-            var userAccount = await _userManager.FindByNameAsync(username);
-            if (userAccount == null) return BadRequest("Invalid user name");
+        //    userAccount.RefreshToken = null;
+        //    await _userManager.UpdateAsync(userAccount);
 
-            userAccount.RefreshToken = null;
-            await _userManager.UpdateAsync(userAccount);
+        //    return Ok();
+        //}
 
-            return Ok();
-        }
+        //[Authorize]
+        //[HttpPost]
+        //[Route("revoke-all")]
+        //public async Task<IActionResult> RevokeAll()
+        //{
+        //    var users = _userManager.Users.ToList();
+        //    foreach (var userAccount in users)
+        //    {
+        //        userAccount.RefreshToken = null;
+        //        await _userManager.UpdateAsync(userAccount);
+        //    }
 
-        [Authorize]
-        [HttpPost]
-        [Route("revoke-all")]
-        public async Task<IActionResult> RevokeAll()
-        {
-            var users = _userManager.Users.ToList();
-            foreach (var userAccount in users)
-            {
-                userAccount.RefreshToken = null;
-                await _userManager.UpdateAsync(userAccount);
-            }
-
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 }

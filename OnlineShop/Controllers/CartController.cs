@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.API.Responses;
 using OnlineShop.Application.CQRS.Carts.Commands.CreateCart;
 using OnlineShop.Application.CQRS.Carts.Commands.RemoveCartById;
 using OnlineShop.Application.CQRS.Carts.Commands.UpdateCart;
 using OnlineShop.Application.CQRS.Carts.DTOs;
 using OnlineShop.Application.CQRS.Carts.Queries.SearchCarts;
 using OnlineShop.Application.CQRS.Carts.Queries.SearchCartsByUserId;
+using OnlineShop.Application.CQRS.Categories.DTOs;
+using OnlineShop.Application.CQRS.Products.DTOs;
 
 namespace OnlineShop.API.Controllers
 {
@@ -16,7 +19,7 @@ namespace OnlineShop.API.Controllers
         //unnecessary endpoints
         //[HttpPost]
         //[Route("Create")]
-        //public async Task<int> Create([FromBody] CreateCartCommand command)
+        //public async Task<Response<int>> Create([FromBody] CreateCartCommand command)
         //{
         //    var id = await _mediator.Send(command);
 
@@ -25,30 +28,38 @@ namespace OnlineShop.API.Controllers
 
         //[HttpPut]
         //[Route("Update")]
-        //public async Task Update([FromBody] UpdateCartCommand command)
+        //public async Task<Response<bool>> Update([FromBody] UpdateCartCommand command)
         //{
         //    await _mediator.Send(command);
+
+            //return new Response<bool>(true, 200, "Success", true);
         //}
 
         //[HttpDelete]
         //[Route("RemoveById")]
-        //public async Task RemoveById([FromQuery] RemoveCartByIdCommand command)
+        //public async Task<Response<bool>> RemoveById([FromQuery] RemoveCartByIdCommand command)
         //{
         //    await _mediator.Send(command);
+
+            //return new Response<bool>(true, 200, "Success", true);
         //}
 
         [HttpGet]
         [Route("GetAllWitPagination")]
-        public async Task<List<GetCartDTO>> GetAll([FromQuery] GetCartsQuery query)
+        public async Task<Response<List<GetCartDTO>>> GetAll([FromQuery] GetCartsQuery query)
         {
-            return await _mediator.Send(query);
+            var result = await _mediator.Send(query);
+
+            return new Response<List<GetCartDTO>>(result, 200, "Success", true);
         }
 
         [HttpGet]
-        [Route("SearchCartsByUserId")]
-        public async Task<GetCartDTO> SearchCartsByUserId([FromQuery] GetCartByUserIdQuery query)
+        [Route("GetCartByUserId")]
+        public async Task<Response<GetCartDTO>> GetCartByUserId([FromQuery] GetCartByUserIdQuery query)
         {
-            return await _mediator.Send(query);
+            var result = await _mediator.Send(query);
+
+            return new Response<GetCartDTO>(result, 200, "Success", true);
         }
     }
 }

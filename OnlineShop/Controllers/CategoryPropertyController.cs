@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShop.API.Responses;
+using OnlineShop.Application.CQRS.BankAccounts.DTOs;
 using OnlineShop.Application.CQRS.CategoryProperties.Commands.CreateCategoryProperty;
 using OnlineShop.Application.CQRS.CategoryProperties.Commands.RemoveByIdCategoryProperty;
 using OnlineShop.Application.CQRS.CategoryProperties.DTOs;
@@ -15,36 +17,38 @@ namespace OnlineShop.API.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public async Task<int> Create([FromBody] CreateCategoryPropertyCommand command)
+        public async Task<Response<int>> Create([FromBody] CreateCategoryPropertyCommand command)
         {
-            var result = await _mediator.Send(command);
+            var id = await _mediator.Send(command);
 
-            return result;
+            return new Response<int>(id, 200, "Success", true);
         }
 
         [HttpDelete]
         [Route("RemoveById")]
-        public async Task RemoveById([FromQuery] RemoveByIdCategoryPropertyCommand command)
+        public async Task<Response<bool>> RemoveById([FromQuery] RemoveByIdCategoryPropertyCommand command)
         {
             await _mediator.Send(command);
+
+            return new Response<bool>(true, 200, "Success", true);
         }
 
         [HttpGet]
         [Route("GetById")]
-        public async Task<GetCategoryPropertyDTO> GetById([FromQuery] GetCategoryPropertyByIdQuery query)
+        public async Task<Response<GetCategoryPropertyDTO>> GetById([FromQuery] GetCategoryPropertyByIdQuery query)
         {
             var result = await _mediator.Send(query);
 
-            return result;
+            return new Response<GetCategoryPropertyDTO>(result, 200, "Success", true);
         }
 
         [HttpGet]
         [Route("Search")]
-        public async Task<List<GetCategoryPropertyDTO>> Search([FromQuery] SearchCategoryPropertiesQuery query)
+        public async Task<Response<List<GetCategoryPropertyDTO>>> Search([FromQuery] SearchCategoryPropertiesQuery query)
         {
             var result = await _mediator.Send(query);
 
-            return result;
+            return new Response<List<GetCategoryPropertyDTO>>(result, 200, "Success", true);
         }
     }
 }

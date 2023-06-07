@@ -6,6 +6,8 @@ using OnlineShop.Application.CQRS.Users.DTOs;
 using OnlineShop.Application.CQRS.Users.Queries.GetUsersByFullName;
 using OnlineShop.Application.CQRS.Users.Queries.GetUserByUserAccountId;
 using OnlineShop.Application.CQRS.Users.Queries.SearchUsers;
+using OnlineShop.API.Responses;
+using OnlineShop.Application.CQRS.Categories.DTOs;
 
 namespace OnlineShop.API.Controllers
 {
@@ -15,30 +17,38 @@ namespace OnlineShop.API.Controllers
 
         [HttpPost]
         [Route("Create")]
-        public async Task<CreateUserDTO> Create([FromBody] CreateUserCommand command)
+        public async Task<Response<CreateUserDTO>> Create([FromBody] CreateUserCommand command)
         {
-            return await _mediator.Send(command);
+            var id = await _mediator.Send(command);
+
+            return new Response<CreateUserDTO>(id, 200, "Success", true);
         }
 
         [HttpGet]
         [Route("GetUserByUserAccountId")]
-        public async Task<GetUserDTO> GetUserByUserAccountId([FromQuery] GetUserByUserAccountIdQuery query)
+        public async Task<Response<GetUserDTO>> GetUserByUserAccountId([FromQuery] GetUserByUserAccountIdQuery query)
         {
-            return await _mediator.Send(query);
+            var result = await _mediator.Send(query);
+
+            return new Response<GetUserDTO>(result, 200, "Success", true);
         }
 
         [HttpGet]
         [Route("GetUsersByFullName")]
-        public async Task<List<GetUserDTO>> GetUsersByFullName([FromQuery] GetUsersByFullNameQuery query)
+        public async Task<Response<List<GetUserDTO>>> GetUsersByFullName([FromQuery] GetUsersByFullNameQuery query)
         {
-            return await _mediator.Send(query);
+            var result = await _mediator.Send(query);
+
+            return new Response<List<GetUserDTO>>(result, 200, "Success", true);
         }
 
         [HttpGet]
         [Route("GetAllWithPagination")]
-        public async Task<List<GetUserDTO>> GetAllWithPagination([FromQuery] SearchUsersQuery query)
+        public async Task<Response<List<GetUserDTO>>> GetAllWithPagination([FromQuery] SearchUsersQuery query)
         {
-            return await _mediator.Send(query);
+            var result = await _mediator.Send(query);
+
+            return new Response<List<GetUserDTO>>(result, 200, "Success", true);
         }
     }
 }
