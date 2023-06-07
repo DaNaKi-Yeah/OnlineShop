@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Application.CQRS.BankAccounts.DTOs;
 using OnlineShop.Application.CQRS.BankAccounts.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
@@ -18,6 +19,13 @@ namespace OnlineShop.Application.CQRS.BankAccounts.Queries.GetBankAccountById
 
         public async Task<GetBankAccountDTO> Handle(GetBankAccountByIdQuery request, CancellationToken cancellationToken)
         {
+            var bankAccount = await _repository.GetQuery().FirstOrDefaultAsync(x => x.Id == request.Id);
+
+            if (bankAccount is null)
+            {
+                throw new ArgumentException($"Not found BankAccount with id ({request.Id})");
+            }
+
             var result = await _repository.GetByIdAsync(request.Id);
 
             return _mapper.Map<GetBankAccountDTO>(result);

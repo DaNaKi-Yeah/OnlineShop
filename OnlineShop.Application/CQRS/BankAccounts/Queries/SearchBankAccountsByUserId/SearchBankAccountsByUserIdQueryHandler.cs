@@ -16,10 +16,24 @@ namespace OnlineShop.Application.CQRS.BankAccounts.Queries.SearchBankAccountsByU
 {
     public class SearchBankAccountsByUserIdQueryHandler : BankAccountHandler, IRequestHandler<SearchBankAccountsByUserIdQuery, List<GetBankAccountDTO>>
     {
-        public SearchBankAccountsByUserIdQueryHandler(IRepository<BankAccount, int> repository, IMapper mapper) : base(repository, mapper) { }
+        private readonly IRepository<User, int> _userRepository;
+        public SearchBankAccountsByUserIdQueryHandler(IRepository<BankAccount, int> repository, IRepository<User, int> userRepository, IMapper mapper) : base(repository, mapper)
+        {
+            _userRepository = userRepository;
+        }
 
         public async Task<List<GetBankAccountDTO>> Handle(SearchBankAccountsByUserIdQuery request, CancellationToken cancellationToken)
         {
+            if (request is not null && request.UserId != 0)
+            {
+                var user = await _userRepository.GetQuery().FirstOrDefaultAsync(x => x.Id == request.UserId);
+
+                if (user is null)
+                {
+                    throw new ArgumentException($"Not found User with id ({request.UserId})");
+                }
+            }
+
             if (request == null || request.UserId == 0)
             {
                 return _mapper.Map<List<GetBankAccountDTO>>(await _repository.GetAllAsync());

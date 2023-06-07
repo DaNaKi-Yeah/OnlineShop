@@ -22,7 +22,7 @@ namespace OnlineShop.Application.CQRS.BankAccounts.DTOs
         {
             profile.CreateMap<BankAccount, GetBankAccountDTO>()
                 .ForMember(x => x.Id, opt => opt.MapFrom(y => y.Id))
-                .ForMember(x => x.FullName, opt => opt.MapFrom(y => $"{y.User.FirsName} + {y.User.LastName}"))
+                .ForMember(x => x.FullName, opt => opt.MapFrom(y => $"{y.User.FirsName} {y.User.LastName}"))
                 .ForMember(x => x.UserId, opt => opt.MapFrom(y => y.UserId))
                 .ForMember(x => x.CardNumber, opt => opt.MapFrom(y => y.CardNumber))
                 .ForMember(x => x.Sum, opt => opt.MapFrom(y => y.Sum))

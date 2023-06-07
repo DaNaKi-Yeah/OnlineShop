@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Application.CQRS.BankAccounts.Handlers;
 using OnlineShop.Application.Repositories.Interfaces;
 using OnlineShop.Domain.Models;
@@ -17,11 +18,16 @@ namespace OnlineShop.Application.CQRS.BankAccounts.Commands.UpdateBankAccount
 
         public async Task Handle(UpdateBankAccountCommand request, CancellationToken cancellationToken)
         {
-            var ba = await _repository.GetByIdAsync(request.Id);
+            var bankAccount = await _repository.GetQuery().FirstOrDefaultAsync(x => x.Id == request.Id);
 
-            ba.Sum += request.AddSum;
+            if (bankAccount is null)
+            {
+                throw new ArgumentException($"Not found BankAccount with id ({request.Id})");
+            }
 
-            await _repository.UpdateAsync(ba);
+            bankAccount.Sum += request.AddSum;
+
+            await _repository.UpdateAsync(bankAccount);
         }
     }
 }
