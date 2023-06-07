@@ -25,7 +25,9 @@ namespace OnlineShop.Application.CQRS.Payments.Queries.GetPaymentById
 
             var result = _mapper.Map<GetPaymentDTO>(payment);
 
-            result.UserName = (await _userRepository.GetByIdAsync((int)payment.Order.Cart.UserId)).UserName;
+            var user = await _userRepository.GetByIdAsync((int)payment.Order.Cart.UserId);
+
+            result.FullName = $"{user.FirsName} + {user.LastName}";
 
             return result;
         }

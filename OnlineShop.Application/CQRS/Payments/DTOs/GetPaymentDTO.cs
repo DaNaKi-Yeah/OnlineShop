@@ -10,7 +10,7 @@ namespace OnlineShop.Application.CQRS.Payments.DTOs
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public string UserName { get; set; }
+        public string FullName { get; set; }
         public int OrderId { get; set; }
         public int BankAccountId { get; set; }
         public decimal TotalSum { get; set; }
