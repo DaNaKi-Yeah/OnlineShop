@@ -93,7 +93,7 @@ namespace OnlineShop.Application.CQRS.Orders.Commands.CreateOrder
             bankAccount.Sum -= sumForPay;
             await _bankAccountRepository.UpdateAsync(bankAccount);
 
-            var inventories = await _inventoryRepository.GetQuery().Where(x => buyItems.Select(y => y.Id).Contains(x.Id)).ToListAsync();
+            var inventories = await _inventoryRepository.GetQuery().Where(x => buyItems.Select(y => y.ProductPropertyValuesInventoryId).Contains(x.Id)).ToListAsync();
 
             foreach (var inventory in inventories)
             {
