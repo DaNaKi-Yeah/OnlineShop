@@ -1,7 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 
 using IdentityServer4.Services;
-
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 using OnlineShop.API.Identity;
 using OnlineShop.API.JWT;
+using OnlineShop.Application.CQRS.Users.Commands.CreateUser;
 using OnlineShop.Domain.Models;
 using OnlineShop.Persistence.Db.SqlServer;
 
@@ -25,14 +26,20 @@ namespace OnlineShop.API.Controllers
         private readonly SQLServerOnlineShopDbContext _context;
         private readonly ITokenService _tokenService;
         private readonly IConfiguration _configuration;
+        private readonly IMediator _mediator;
 
-        public AccountsController(ITokenService tokenService, SQLServerOnlineShopDbContext context, UserManager<UserAccount> userManager, IConfiguration configuration)
+        public AccountsController(
+            ITokenService tokenService, 
+            SQLServerOnlineShopDbContext context, 
+            UserManager<UserAccount> userManager, 
+            IConfiguration configuration,
+            IMediator mediator)
         {
             _tokenService = tokenService;
             _context = context;
             _userManager = userManager;
             _configuration = configuration;
-            
+            _mediator = mediator;
         }
 
         [HttpPost("login")]
@@ -73,6 +80,7 @@ namespace OnlineShop.API.Controllers
 
             return Ok(new AuthResponse
             {
+                Id = userAccount.Id,
                 Username = userAccount.UserName!,
                 Email = userAccount.Email!,
                 Token = accessToken,
@@ -84,14 +92,22 @@ namespace OnlineShop.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<ActionResult<AuthResponse>> RegisterAdmin([FromBody] RegisterRequest request)
         {
-            return await RegisterNewUser(request, "admin");
+            var result = await RegisterNewUser(request, "admin");
+
+            await _mediator.Send(new CreateUserCommand() { UserAccountId = result.Value.Id });
+
+            return result;
         }
 
         [AllowAnonymous]
         [HttpPost("register/client")]
         public async Task<ActionResult<AuthResponse>> RegisterClient([FromBody] RegisterRequest request)
         {
-            return await RegisterNewUser(request, "client");
+            var result = await RegisterNewUser(request, "client");
+
+            await _mediator.Send(new CreateUserCommand() { UserAccountId = result.Value.Id });
+
+            return result;
         }
 
         private async Task<ActionResult<AuthResponse>> RegisterNewUser(RegisterRequest request, string roleName)
