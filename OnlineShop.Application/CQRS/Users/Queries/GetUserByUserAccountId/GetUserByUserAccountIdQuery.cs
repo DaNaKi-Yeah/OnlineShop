@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OnlineShop.Application.CQRS.Users.Queries.GetUsers
+namespace OnlineShop.Application.CQRS.Users.Queries.GetUserByUserAccountId
 {
-    public class GetUsersQuery : IRequest<List<GetUserDTO>>
+    public class GetUserByUserAccountIdQuery : IRequest<GetUserDTO>
     {
-
+        public int UserAccountId { get; set; }
     }
 }
