@@ -22,7 +22,7 @@ namespace OnlineShop.Application.CQRS.Users.Commands.CreateUser
 
         public async Task<CreateUserDTO> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var userId = await _repository.AddAsync(new User() { UserName = request.UserName });
+            var userId = await _repository.AddAsync(new User() { UserAccountId = request.UserAccountId });
 
             var cartId = await _cartRepository.AddAsync(new Cart() { UserId = userId });
 

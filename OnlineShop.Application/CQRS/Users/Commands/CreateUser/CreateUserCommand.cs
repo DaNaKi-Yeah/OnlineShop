@@ -10,6 +10,6 @@ namespace OnlineShop.Application.CQRS.Users.Commands.CreateUser
 {
     public class CreateUserCommand : IRequest<CreateUserDTO>
     {
-        public string UserName { get; set; }
+        public int UserAccountId { get; set; }
     }
 }
