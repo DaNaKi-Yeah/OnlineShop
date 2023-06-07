@@ -2,6 +2,8 @@
 
 Финальный проект на курсах
 
+Деплоили с помощью сайт SmarterASP.NET
+
 Ссылка на сайт: http://yrys2016-001-site1.atempurl.com (фронта нет)
 
 Ссылка на сваггер: http://yrys2016-001-site1.atempurl.com/swagger/index.html
