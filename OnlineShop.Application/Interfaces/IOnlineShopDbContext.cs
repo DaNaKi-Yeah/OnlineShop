@@ -25,7 +25,7 @@ namespace OnlineShop.Application.Interfaces
         DbSet<Value> Values { get; set; }
         DbSet<Property> Properties { get; set; }
         DbSet<BankAccount> BankAccounts { get; set; }
-
+        DbSet<UserAccount>  UserAccounts { get; set; }               
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

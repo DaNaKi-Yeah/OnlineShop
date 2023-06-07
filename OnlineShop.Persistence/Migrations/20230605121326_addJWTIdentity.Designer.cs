@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnlineShop.Persistence.Db.SqlServer;
 
@@ -11,9 +12,11 @@ using OnlineShop.Persistence.Db.SqlServer;
 namespace OnlineShop.Persistence.Migrations
 {
     [DbContext(typeof(SQLServerOnlineShopDbContext))]
-    partial class SQLServerOnlineShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230605121326_addJWTIdentity")]
+    partial class addJWTIdentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,8 +186,7 @@ namespace OnlineShop.Persistence.Migrations
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UserId")
-                        .IsRequired()
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -316,7 +318,7 @@ namespace OnlineShop.Persistence.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("UpdateDate")
@@ -327,8 +329,7 @@ namespace OnlineShop.Persistence.Migrations
                     b.HasIndex("BankAccountId");
 
                     b.HasIndex("OrderId")
-                        .IsUnique()
-                        .HasFilter("[OrderId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Payments");
                 });
@@ -473,10 +474,6 @@ namespace OnlineShop.Persistence.Migrations
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CartId")
@@ -521,6 +518,9 @@ namespace OnlineShop.Persistence.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("MiddleName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -780,7 +780,8 @@ namespace OnlineShop.Persistence.Migrations
                     b.HasOne("OnlineShop.Domain.Models.Order", "Order")
                         .WithOne("Payment")
                         .HasForeignKey("OnlineShop.Domain.Models.Payment", "OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("BankAccount");
 

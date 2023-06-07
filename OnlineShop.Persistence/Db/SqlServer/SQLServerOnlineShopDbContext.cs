@@ -1,9 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+
 using OnlineShop.Application.Interfaces;
 using OnlineShop.Domain.Common;
 using OnlineShop.Domain.Models;
 using OnlineShop.Domain.Relations;
 using OnlineShop.Persistence.EntityTypeConfigurations;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +15,16 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace OnlineShop.Persistence.Db.SqlServer
 {
-    public class SQLServerOnlineShopDbContext : DbContext, IOnlineShopDbContext
+    public class SQLServerOnlineShopDbContext : IdentityDbContext<UserAccount, IdentityRole<int>, int>, IOnlineShopDbContext
     {
+        public SQLServerOnlineShopDbContext(DbContextOptions<SQLServerOnlineShopDbContext> options)
+        : base(options)
+        {
+            
+        }
         public DbSet<BuyItem> BuyItems { get; set; }
         public DbSet<CategoryProperty> CategoryProperties { get; set; }
         public DbSet<Cart> Carts { get; set; }
@@ -29,9 +39,8 @@ namespace OnlineShop.Persistence.Db.SqlServer
         public DbSet<Value> Values { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
-
-        public SQLServerOnlineShopDbContext(DbContextOptions options) : base(options) { }
-
+        public DbSet<UserAccount> UserAccounts { get; set; }
+        
         private bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
         {
             while (toCheck != null && toCheck != typeof(object))
