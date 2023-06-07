@@ -25,7 +25,9 @@ namespace OnlineShop.Application.CQRS.Orders.Queries.GetOrderById
 
             var getOrder = _mapper.Map<GetOrderDTO>(order);
 
-            getOrder.UserName = (await _userRepository.GetByIdAsync((int)order.Cart.UserId)).UserName;
+            var user = await _userRepository.GetByIdAsync((int)order.Cart.UserId);
+
+            getOrder.FullName = $"{user.FirsName} + {user.LastName}";
 
             return getOrder;
         }

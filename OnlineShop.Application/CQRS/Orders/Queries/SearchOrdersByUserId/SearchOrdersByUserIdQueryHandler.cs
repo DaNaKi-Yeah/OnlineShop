@@ -33,7 +33,7 @@ namespace OnlineShop.Application.CQRS.Orders.Queries.SearchOrdersByUserId
                 {
                     var cart = allItems.First(x => x.Id == getItem.Id).Cart;
                     var user = await _userRepository.GetByIdAsync((int)cart.UserId);
-                    getItem.UserName = user.UserName;
+                    getItem.FullName = $"{user.FirsName} + {user.LastName}";
                 }
 
                 return allGetItems;
@@ -48,7 +48,7 @@ namespace OnlineShop.Application.CQRS.Orders.Queries.SearchOrdersByUserId
             {
                 var cart = items.First(x => x.Id == getItem.Id).Cart;
                 var user = await _userRepository.GetByIdAsync((int)cart.UserId);
-                getItem.UserName = user.UserName;
+                getItem.FullName = $"{user.FirsName} + {user.LastName}";
             }
 
 
