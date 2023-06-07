@@ -92,22 +92,14 @@ namespace OnlineShop.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "admin")]
         public async Task<ActionResult<AuthResponse>> RegisterAdmin([FromBody] RegisterRequest request)
         {
-            var result = await RegisterNewUser(request, "admin");
-
-            await _mediator.Send(new CreateUserCommand() { UserAccountId = result.Value.Id });
-
-            return result;
+            return await RegisterNewUser(request, "admin");
         }
 
         [AllowAnonymous]
         [HttpPost("register/client")]
         public async Task<ActionResult<AuthResponse>> RegisterClient([FromBody] RegisterRequest request)
         {
-            var result = await RegisterNewUser(request, "client");
-
-            await _mediator.Send(new CreateUserCommand() { UserAccountId = result.Value.Id });
-
-            return result;
+            return await RegisterNewUser(request, "client");
         }
 
         private async Task<ActionResult<AuthResponse>> RegisterNewUser(RegisterRequest request, string roleName)
@@ -131,6 +123,8 @@ namespace OnlineShop.API.Controllers
             if (!result.Succeeded) return BadRequest(ModelState);
 
             var findUser = await _context.UserAccounts.FirstOrDefaultAsync(x => x.Email == request.Email);
+
+            await _mediator.Send(new CreateUserCommand() { UserAccountId = findUser.Id });
 
             if (findUser == null) throw new Exception($"User {request.Email} not found");
 
