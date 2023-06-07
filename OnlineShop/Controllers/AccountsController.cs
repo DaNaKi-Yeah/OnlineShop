@@ -1,6 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
 
-using IdentityServer4.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
