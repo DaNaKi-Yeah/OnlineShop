@@ -17,6 +17,7 @@ using OnlineShop.API.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Hosting;
+using OnlineShop.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -124,6 +125,7 @@ app.UseSwaggerUI(c =>
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "OnlineShop");
 });
 
+app.ConfigureExceptionHandler();
 
 app.UseHttpsRedirection();
 
