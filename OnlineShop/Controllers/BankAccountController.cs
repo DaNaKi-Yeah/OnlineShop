@@ -14,7 +14,6 @@ using OnlineShop.Application.CQRS.BuyItems.DTOs;
 using OnlineShop.Application.CQRS.BuyItems.Queries.GetBuyItemById;
 using OnlineShop.Application.CQRS.BuyItems.Queries.SearchBuyItems;
 using OnlineShop.Application.CQRS.BuyItems.Queries.SearchBuyItemsByUserId;
-using OnlineShop.Application.CQRS.Users.Commands.UpdateUser;
 
 namespace OnlineShop.API.Controllers
 {
